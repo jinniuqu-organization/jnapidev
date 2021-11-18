@@ -1,8 +1,9 @@
-package cn.stephen.study.demoproject.controller;
+package cn.stephen.study.htapitoproject.controller;
 
 
-import cn.stephen.study.demoproject.entity.TestEntity;
-import cn.stephen.study.demoproject.service.TestService;
+import cn.stephen.study.htapitoproject.entity.TestEntity;
+import cn.stephen.study.htapitoproject.service.TestService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Slf4j
 @RequestMapping("/demoproject/test")
 public class TestController {
 
@@ -18,7 +20,7 @@ public class TestController {
 
     @RequestMapping(value = "/get/{id}",method = RequestMethod.GET)
     public TestEntity test(@PathVariable Integer id){
-        System.out.println("id:" + id);
+        log.info("id:" + id);
         return testService.getById(id);
     }
 

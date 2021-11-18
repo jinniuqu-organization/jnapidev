@@ -1,4 +1,4 @@
-package cn.stephen.study.demoproject.entity;
+package cn.stephen.study.htapitoproject.entity;
 
 public class TestEntity {
 

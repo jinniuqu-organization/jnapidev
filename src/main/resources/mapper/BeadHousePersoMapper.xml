@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stephen.study.htapitoproject.dao.BeadHousePersonDao">
+
+    <!--插入-->
+    <insert id="insert" parameterType="cn.stephen.study.htapitoproject.entity.BeadHousePerson">
+        insert into api_beadhouseperson(
+        id,audit_state,
+        name,gender,
+        idcard_no,phone,
+        self_care,household,
+        buildup_area,is_poor,
+        town,village_name,
+        created_on,deleted,
+        etl_time
+        )values (
+        #{id},#{auditState},
+        #{name},#{gender},
+        #{idcardNo},#{phone},
+        #{selfCare},#{household},
+        #{buildupArea},#{isPoor},
+        #{town},#{villageName},
+        #{createdOn},#{deleted},
+        #{etlTime}
+        )
+    </insert>
+</mapper>

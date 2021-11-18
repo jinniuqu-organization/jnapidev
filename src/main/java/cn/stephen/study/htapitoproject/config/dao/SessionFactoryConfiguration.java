@@ -1,4 +1,4 @@
-package cn.stephen.study.demoproject.config.dao;
+package cn.stephen.study.htapitoproject.config.dao;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
