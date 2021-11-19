@@ -40,5 +40,68 @@ public class HttpTestService {
             log.info(testEntity.getFirstName()+testEntity.getLastName());
         }
     }*/
+   public static void main(String[] args) {
+       String s="Id\n" +
+               "SmId\n" +
+               "Name\n" +
+               "Type\n" +
+               "RegCapital\n" +
+               "EstablishedTime\n" +
+               "Status\n" +
+               "Pos\n" +
+               "X\n" +
+               "Y\n" +
+               "RawMaterial\n" +
+               "Product\n" +
+               "SalesRevenue\n" +
+               "TechProcess\n" +
+               "Phone\n" +
+               "Email\n" +
+               "BuzLicense\n" +
+               "EIA\n" +
+               "EIAcheck\n" +
+               "FireControlFile\n" +
+               "Certificate\n" +
+               "TwoSysBuild\n" +
+               "HazardRp\n" +
+               "EmergencyPlan\n" +
+               "Area\n" +
+               "LandCardNo\n" +
+               "LandType\n" +
+               "LegalPerson\n" +
+               "LegalPhone\n" +
+               "Principal\n" +
+               "SecPrincipal\n" +
+               "SecOfficer\n" +
+               "GridMember\n" +
+               "ProdEquipment\n" +
+               "EnvEquipment\n" +
+               "SolidWaste\n" +
+               "HazardousWaste\n" +
+               "WastewaterOut\n" +
+               "RaiseDust\n" +
+               "ProdDust\n" +
+               "ExhaustGasOut\n" +
+               "StaffTotal\n" +
+               "StaffGraduateAbove\n" +
+               "StaffUndergraduate\n" +
+               "StaffJuniorCollege\n" +
+               "StaffOther\n" +
+               "HasPartyOrg\n" +
+               "PartyMemberTotal\n" +
+               "VillageCode\n" +
+               "Town\n" +
+               "VillageName\n" +
+               "IndustryType\n" +
+               "IndustryCode\n" +
+               "CurrentStatus\n" +
+               "JiGaiShiJianNeiRong\n" +
+               "LiXiangNeiRongWenHaoShiJian\n" +
+               "EtlTime\n";
+       for (String slist : s.split("\n")) {
+         //  System.out.println("bean.set"+slist+"((String) map.get("+"\"\""+"));");
+           System.out.println("         "+"#{"+slist+"},");
+       }
+   }
 
 }
