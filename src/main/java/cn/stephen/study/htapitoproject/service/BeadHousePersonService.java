@@ -34,8 +34,8 @@ public class BeadHousePersonService {
     public String token;
 
     //养老院人口
-    //每分钟执行一次
-    @Scheduled(cron ="0 */2 * * * ?")
+    //每天2点35执行一次
+    @Scheduled(cron ="0 35 2 * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void insertBeadHousePerson() throws Exception {
         Map<String,String> parameters=new HashMap<String,String>();
@@ -73,7 +73,7 @@ public class BeadHousePersonService {
     }
 
     //社区人口
-    @Scheduled(cron ="0 */3 * * * ?")
+    @Scheduled(cron ="0 30 2 * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void insertCommunityPopul() throws Exception {
         Map<String,String> parameters=new HashMap<String,String>();
