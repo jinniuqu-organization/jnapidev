@@ -85,6 +85,71 @@
 		#{deleted},
 		#{etlTime}
         )
-
     </insert>
+
+	<insert id="insertKeypopul" parameterType="cn.stephen.study.htapitoproject.entity.KeyPopul">
+		insert IGNORE into api_keypopul(
+		id	,
+		Name	,
+		TownName	,
+		VillageName	,
+		IdCardNo	,
+		Address	,
+		Gender	,
+		Phone	,
+		Type	,
+		ExtData	,
+		Remark	,
+		EtlTime
+		)values (
+         #{Id},
+         HEX(AES_ENCRYPT(#{Name},'e')),
+         #{TownName},
+         #{VillageName},
+         HEX(AES_ENCRYPT(#{IdCardNo},'e')),
+         #{Address},
+         #{Gender},
+         HEX(AES_ENCRYPT(#{Phone},'e')),
+         #{Type},
+         #{ExtData},
+         #{Remark},
+         now()
+		)
+	</insert>
+
+	<insert id="insertAllpopul" parameterType="cn.stephen.study.htapitoproject.entity.AllPopul">
+		insert IGNORE into api_allpopul(
+		id	,
+		IdCardNo	,
+		HouseholdNo	,
+		Name	,
+		Relation	,
+		Committee	,
+		Address	,
+		FertileWoman	,
+		CommunityCorrection	,
+		PartyMember	,
+		MaritalStatus	,
+		Phone	,
+		Nation	,
+		Town	,
+		EtlTime
+		)values (
+         #{Id},
+         HEX(AES_ENCRYPT(#{IdCardNo},'e')),
+         #{HouseholdNo},
+         HEX(AES_ENCRYPT(#{Name},'e')),
+         #{Relation},
+         #{Committee},
+         #{Address},
+         #{FertileWoman},
+         #{CommunityCorrection},
+         #{PartyMember},
+         #{MaritalStatus},
+         HEX(AES_ENCRYPT(#{Phone},'e')),
+         #{Nation},
+         #{Town},
+         now()
+		)
+	</insert>
 </mapper>

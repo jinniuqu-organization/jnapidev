@@ -1,12 +1,15 @@
 package cn.stephen.study.htapitoproject.service;
 
 import cn.stephen.study.htapitoproject.dao.BeadHousePersonDao;
+import cn.stephen.study.htapitoproject.entity.AllPopul;
 import cn.stephen.study.htapitoproject.entity.BeadHousePerson;
 import cn.stephen.study.htapitoproject.entity.CommunityPopul;
+import cn.stephen.study.htapitoproject.entity.KeyPopul;
 import cn.stephen.study.htapitoproject.utils.HttpUtil;
 import cn.stephen.study.htapitoproject.utils.JsonUtils;
 import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.xmlbeans.impl.xb.xsdschema.All;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -44,7 +47,7 @@ public class BeadHousePersonService {
         Map<String,String> head=new HashMap<String,String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/BeadHousePerson", parameters,head);
-        log.info("#######"+result);
+        log.info("#######"+"养老院人口");
         if(null !=result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -82,7 +85,7 @@ public class BeadHousePersonService {
         Map<String,String> head=new HashMap<String,String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/CommunityPopul", parameters,head);
-        log.info("######"+result);
+        log.info("######"+"社区人口");
         if(null !=result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -121,4 +124,72 @@ public class BeadHousePersonService {
         }
     }
 
+    //key人口
+    @Scheduled(cron ="0 10 1 * * ?")
+    //@Scheduled(cron ="0 * * * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertKeyPopul() throws Exception {
+        Map<String,String> parameters=new HashMap<String,String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "160000");
+        Map<String,String> head=new HashMap<String,String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/KeyPopul", parameters,head);
+        log.info("######"+"key人口");
+        if(null !=result) {
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                KeyPopul bean =new KeyPopul();
+                bean.setId((Integer) map.get("id"));
+                bean.setName((String) map.get("name"));
+                bean.setTownName((String) map.get("townName"));
+                bean.setVillageName((String) map.get("villageName"));
+                bean.setIdCardNo((String) map.get("idCardNo"));
+                bean.setAddress((String) map.get("address"));
+                bean.setGender((String) map.get("gender"));
+                bean.setPhone((String) map.get("phone"));
+                bean.setType((String) map.get("type"));
+                bean.setExtData((String) map.get("extData"));
+                bean.setRemark((String) map.get("remark"));
+                beadHousePersonDao.insertKeypopul(bean);
+            }
+        }
+    }
+
+    //总人口
+    @Scheduled(cron ="0 0 1 * * ?")
+    //@Scheduled(cron ="0 * * * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertAllPopul() throws Exception {
+        Map<String,String> parameters=new HashMap<String,String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "500000");
+        Map<String,String> head=new HashMap<String,String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Popul", parameters,head);
+        log.info("######"+"总人口");
+        if(null !=result) {
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                AllPopul bean =new AllPopul();
+                bean.setId((Integer) map.get("id"));
+                bean.setIdCardNo((String) map.get("idCardNo"));
+                bean.setHouseholdNo((String) map.get("householdNo"));
+                bean.setName((String) map.get("name"));
+                bean.setRelation((String) map.get("relation"));
+                bean.setCommittee((String) map.get("committee"));
+                bean.setAddress((String) map.get("address"));
+                bean.setFertileWoman((String) map.get("fertileWoman"));
+                bean.setCommunityCorrection((String) map.get("communityCorrection"));
+                bean.setPartyMember((String) map.get("partyMember"));
+                bean.setMaritalStatus((String) map.get("maritalStatus"));
+                bean.setPhone((String) map.get("phone"));
+                bean.setNation((String) map.get("nation"));
+                bean.setTown((String) map.get("town"));
+                beadHousePersonDao.insertAllpopul(bean);
+            }
+        }
+    }
 }

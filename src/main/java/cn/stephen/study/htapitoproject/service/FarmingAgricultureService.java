@@ -46,7 +46,7 @@ public class FarmingAgricultureService {
         Map<String, String> head = new HashMap<String, String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Farm", parameters, head);
-        log.info("#######" + result);
+        log.info("#######" + "养殖鸡鸭鹅");
         if (null != result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -83,7 +83,7 @@ public class FarmingAgricultureService {
                 bean.setDeleted((Boolean) map.get("deleted"));
                 bean.setEtlTime(new Date());
                 farmingAgricultureDao.insertFarm(bean);
-                log.info(bean.getHostName());
+                //log.info(bean.getHostName());
             }
         }
     }
@@ -100,7 +100,7 @@ public class FarmingAgricultureService {
         Map<String, String> head = new HashMap<String, String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Housing", parameters, head);
-        log.info("#######" + result);
+        log.info("#######" + "住房");
         if (null != result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -140,7 +140,7 @@ public class FarmingAgricultureService {
         Map<String, String> head = new HashMap<String, String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/IdleCourtyard", parameters, head);
-        log.info("#######" + result);
+        log.info("#######" + "闲置院落");
         if (null != result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);

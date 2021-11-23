@@ -41,33 +41,24 @@ public class HttpTestService {
         }
     }*/
    public static void main(String[] args) {
-       String s="id\n" +
-               "SN\n" +
-               "VillageName\n" +
-               "Pos\n" +
-               "LandType\n" +
-               "Area\n" +
-               "Appendant\n" +
-               "UsageStatus\n" +
-               "Contractor\n" +
+       String s="Id\n" +
                "IdCardNo\n" +
-               "ContractorPhone\n" +
-               "Principal\n" +
-               "PrincipalPhone\n" +
-               "Images\n" +
-               "X\n" +
-               "Y\n" +
-               "Town\n" +
-               "Location\n" +
-               "Purpose\n" +
-               "Materiel\n" +
-               "Lessor\n" +
-               "GridMember\n" +
+               "HouseholdNo\n" +
+               "Name\n" +
+               "Relation\n" +
+               "Committee\n" +
+               "Address\n" +
+               "FertileWoman\n" +
+               "CommunityCorrection\n" +
+               "PartyMember\n" +
+               "MaritalStatus\n" +
                "Phone\n" +
-               "etlTime\n";
+               "Nation\n" +
+               "Town\n" +
+               "EtlTime\n";
        for (String slist : s.split("\n")) {
-         //  System.out.println("private String "+slist+";");
-         //  System.out.println("bean.set"+slist+"((String) map.get("+"\"\""+"));");
+          //System.out.println("private String "+slist+";");
+          //System.out.println("bean.set"+slist+"((String) map.get("+"\"\""+"));");
            System.out.println("         "+"#{"+slist+"},");
        }
    }

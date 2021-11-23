@@ -42,7 +42,7 @@ public class EnterpriseService {
         Map<String, String> head = new HashMap<String, String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Enterprise", parameters, head);
-        log.info("######" + result);
+        log.info("######" + "企业数据");
         if (null != result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -106,7 +106,7 @@ public class EnterpriseService {
                 bean.setLiXiangNeiRongWenHaoShiJian((String) map.get("liXiangNeiRongWenHaoShiJian"));
                 bean.setEtlTime(new Date());
                 enterpriseDao.insertEnterprise(bean);
-                log.info(bean.getName());
+                //log.info(bean.getName());
             }
         }
     }
