@@ -1,9 +1,7 @@
 package cn.stephen.study.htapitoproject.service;
 
 import cn.stephen.study.htapitoproject.dao.FarmingAgricultureDao;
-import cn.stephen.study.htapitoproject.entity.Farm;
-import cn.stephen.study.htapitoproject.entity.Housing;
-import cn.stephen.study.htapitoproject.entity.Idlecourtyard;
+import cn.stephen.study.htapitoproject.entity.*;
 import cn.stephen.study.htapitoproject.utils.HttpUtil;
 import cn.stephen.study.htapitoproject.utils.JsonUtils;
 import com.alibaba.fastjson.JSONArray;
@@ -170,6 +168,122 @@ public class FarmingAgricultureService {
                 bean.setGridMember((String) map.get("gridMember"));
                 bean.setPhone((String) map.get("phone"));
                 farmingAgricultureDao.insertIdlecouryard(bean);
+            }
+        }
+    }
+
+    //旱厕改造
+    //每天1点15分执行一次
+    //@Scheduled(cron ="0 * * * * ?")
+    @Scheduled(cron ="0 55 1 * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertLatrineReform() throws Exception {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "20000");
+        Map<String, String> head = new HashMap<String, String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/LatrineReform", parameters, head);
+        if (null != result) {
+            log.info("#######" + "旱厕改造");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                LatrineReform bean=new LatrineReform();
+                bean.setId((Integer) map.get("id"));
+                bean.setIdCardNo((String) map.get("idCardNo"));
+                bean.setHouseholdNo((String) map.get("householdNo"));
+                bean.setName((String) map.get("name"));
+                bean.setRelation((String) map.get("relation"));
+                bean.setCommittee((String) map.get("committee"));
+                bean.setAddress((String) map.get("address"));
+                bean.setDryToilet((String) map.get("dryToilet"));
+                bean.setDryToiletType((String) map.get("dryToiletType"));
+                bean.setDryToiletUsageType((String) map.get("dryToiletUsageType"));
+                bean.setHourseCode((String) map.get("hourseCode"));
+                bean.setGas2Coal((String) map.get("gas2Coal"));
+                bean.setEle2Coal((String) map.get("ele2Coal"));
+                bean.setX((String) map.get("x"));
+                bean.setY((String) map.get("y"));
+                bean.setTown((String) map.get("town"));
+                bean.setToiletType((String) map.get("toiletType"));
+                bean.setToiletDryDate((String) map.get("toiletDryDate"));
+                bean.setIsMaintain((String) map.get("isMaintain"));
+                bean.setHeatType((String) map.get("heatType"));
+                bean.setHeatDryDate((String) map.get("heatDryDate"));
+                bean.setImage((String) map.get("image"));
+                bean.setHeatImage((String) map.get("heatImage"));
+                farmingAgricultureDao.insertLatrineReform(bean);
+            }
+        }
+    }
+
+    //九小场所
+    //每天1点45分执行一次
+    //@Scheduled(cron ="0 * * * * ?")
+    @Scheduled(cron ="0 45 1 * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertNineSmallPlaces() throws Exception {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "10000");
+        Map<String, String> head = new HashMap<String, String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/NineSmallPlaces", parameters, head);
+        if (null != result) {
+            log.info("#######" + "九小场所");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                NineSmallPlaces bean =new NineSmallPlaces();
+                bean.setId((Integer) map.get("id"));
+                bean.setVillageName((String) map.get("villageName"));
+                bean.setCompanyName((String) map.get("companyName"));
+                bean.setCompanyType((String) map.get("companyType"));
+                bean.setPersonInCharge((String) map.get("personInCharge"));
+                bean.setIdCardNo((String) map.get("idCardNo"));
+                bean.setPhone((String) map.get("phone"));
+                bean.setSmX((String) map.get("smX"));
+                bean.setSmY((String) map.get("smY"));
+                bean.setPos((String) map.get("pos"));
+                bean.setComment((String) map.get("comment"));
+                bean.setImageNo((String) map.get("imageNo"));
+                bean.setTown((String) map.get("town"));
+                farmingAgricultureDao.insertNineSmallPlaces(bean);
+            }
+        }
+    }
+
+    //窑湾数据
+    //每天1点40分执行一次
+    @Scheduled(cron ="0 40 1 * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertPoolBay() throws Exception {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "5000");
+        Map<String, String> head = new HashMap<String, String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/PoolBay", parameters, head);
+        if (null != result) {
+            log.info("#######" + "窑湾数据");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                PoolBay bean =new PoolBay();
+                bean.setId((Integer) map.get(""));
+                bean.setSN((String) map.get(""));
+                bean.setTown((String) map.get(""));
+                bean.setName((String) map.get(""));
+                bean.setPos((String) map.get(""));
+                bean.setSituation((String) map.get(""));
+                bean.setX((String) map.get(""));
+                bean.setY((String) map.get(""));
+                bean.setComment((String) map.get(""));
+                bean.setImages((String) map.get(""));
+                bean.setPerson((String) map.get(""));
+                bean.setPurpose((String) map.get(""));
+                farmingAgricultureDao.insertPoolBay(bean);
             }
         }
     }

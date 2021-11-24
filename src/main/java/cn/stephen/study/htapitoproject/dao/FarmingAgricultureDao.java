@@ -1,8 +1,6 @@
 package cn.stephen.study.htapitoproject.dao;
 
-import cn.stephen.study.htapitoproject.entity.Farm;
-import cn.stephen.study.htapitoproject.entity.Housing;
-import cn.stephen.study.htapitoproject.entity.Idlecourtyard;
+import cn.stephen.study.htapitoproject.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -17,4 +15,10 @@ public interface FarmingAgricultureDao {
     void insertHousing(Housing bean);
 
     void insertIdlecouryard(Idlecourtyard bean);
+    //旱厕改造
+    void insertLatrineReform(LatrineReform bean);
+    //九小场所
+    void insertNineSmallPlaces(NineSmallPlaces bean);
+    //窑厂
+    void insertPoolBay(PoolBay bean);
 }

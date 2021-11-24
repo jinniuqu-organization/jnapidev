@@ -42,19 +42,17 @@ public class HttpTestService {
     }*/
    public static void main(String[] args) {
        String s="Id\n" +
-               "IdCardNo\n" +
-               "HouseholdNo\n" +
-               "Name\n" +
-               "Relation\n" +
-               "Committee\n" +
-               "Address\n" +
-               "FertileWoman\n" +
-               "CommunityCorrection\n" +
-               "PartyMember\n" +
-               "MaritalStatus\n" +
-               "Phone\n" +
-               "Nation\n" +
+               "SN\n" +
                "Town\n" +
+               "Name\n" +
+               "Pos\n" +
+               "Situation\n" +
+               "X\n" +
+               "Y\n" +
+               "Comment\n" +
+               "images\n" +
+               "Person\n" +
+               "Purpose\n" +
                "EtlTime\n";
        for (String slist : s.split("\n")) {
           //System.out.println("private String "+slist+";");

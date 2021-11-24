@@ -160,4 +160,124 @@
          now()
         )
     </insert>
+
+    <insert id="insertLatrineReform" parameterType="cn.stephen.study.htapitoproject.entity.LatrineReform">
+        insert  IGNORE into api_latrinereform(
+		Id	,
+		IdCardNo	,
+		HouseholdNo	,
+		Name	,
+		Relation	,
+		Committee	,
+		Address	,
+		DryToilet	,
+		DryToiletType	,
+		DryToiletUsageType	,
+		HourseCode	,
+		Gas2Coal	,
+		Ele2Coal	,
+		X	,
+		Y	,
+		Town	,
+		ToiletType	,
+		ToiletDryDate	,
+		IsMaintain	,
+		HeatType	,
+		HeatDryDate	,
+		Image	,
+		HeatImage	,
+		EtlTime
+        )values (
+         #{Id},
+         HEX(AES_ENCRYPT(#{IdCardNo},'e' )),
+         #{HouseholdNo},
+         HEX(AES_ENCRYPT(#{Name},'e' )),
+         #{Relation},
+         #{Committee},
+         #{Address},
+         #{DryToilet},
+         #{DryToiletType},
+         #{DryToiletUsageType},
+         #{HourseCode},
+         #{Gas2Coal},
+         #{Ele2Coal},
+         #{X},
+         #{Y},
+         #{Town},
+         #{ToiletType},
+         #{ToiletDryDate},
+         #{IsMaintain},
+         #{HeatType},
+         #{HeatDryDate},
+         #{Image},
+         #{HeatImage},
+         now()
+        )
+    </insert>
+
+    <insert id="insertNineSmallPlaces" parameterType="cn.stephen.study.htapitoproject.entity.NineSmallPlaces">
+        insert  IGNORE into api_ninesmallplaces(
+		id	,
+		VillageName	,
+		CompanyName	,
+		CompanyType	,
+		PersonInCharge	,
+		IdCardNo	,
+		Phone	,
+		SmX	,
+		SmY	,
+		Pos	,
+		comment	,
+		ImageNo	,
+		Town	,
+		EtlTime
+        )values (
+         #{Id},
+         #{VillageName},
+         #{CompanyName},
+         #{CompanyType},
+         HEX(AES_ENCRYPT(#{PersonInCharge},'e' )),
+         HEX(AES_ENCRYPT(#{IdCardNo},'e' )),
+         HEX(AES_ENCRYPT(#{Phone},'e' )),
+         #{SmX},
+         #{SmY},
+         #{Pos},
+         #{comment},
+         #{ImageNo},
+         #{Town},
+         now()
+        )
+    </insert>
+
+    <insert id="insertPoolBay" parameterType="cn.stephen.study.htapitoproject.entity.PoolBay">
+        insert  IGNORE into api_poolbay(
+		id	,
+		SN	,
+		Town	,
+		Name	,
+		Pos	,
+		Situation	,
+		X	,
+		Y	,
+		Comment	,
+		images	,
+		Person	,
+		Purpose	,
+		EtlTime
+        )values (
+         #{Id},
+         #{SN},
+         #{Town},
+         #{Name},
+         #{Pos},
+         #{Situation},
+         #{X},
+         #{Y},
+         #{Comment},
+         #{images},
+         #{Person},
+         #{Purpose},
+         now()
+        )
+    </insert>
 </mapper>
