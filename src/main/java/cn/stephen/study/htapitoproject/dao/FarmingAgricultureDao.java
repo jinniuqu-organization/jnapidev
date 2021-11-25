@@ -21,4 +21,6 @@ public interface FarmingAgricultureDao {
     void insertNineSmallPlaces(NineSmallPlaces bean);
     //窑厂
     void insertPoolBay(PoolBay bean);
+    //垃圾清运
+    void insertRubbishClear(RubbishClear bean);
 }

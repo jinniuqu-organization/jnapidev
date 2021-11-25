@@ -180,7 +180,7 @@ public class FarmingAgricultureService {
     public void insertLatrineReform() throws Exception {
         Map<String, String> parameters = new HashMap<String, String>();
         parameters.put("page", "1");
-        parameters.put("pagesize", "20000");
+        parameters.put("pagesize", "200000");
         Map<String, String> head = new HashMap<String, String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/LatrineReform", parameters, head);
@@ -271,19 +271,54 @@ public class FarmingAgricultureService {
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
             for (Map map : list) {
                 PoolBay bean =new PoolBay();
-                bean.setId((Integer) map.get(""));
-                bean.setSN((String) map.get(""));
-                bean.setTown((String) map.get(""));
-                bean.setName((String) map.get(""));
-                bean.setPos((String) map.get(""));
-                bean.setSituation((String) map.get(""));
-                bean.setX((String) map.get(""));
-                bean.setY((String) map.get(""));
-                bean.setComment((String) map.get(""));
-                bean.setImages((String) map.get(""));
-                bean.setPerson((String) map.get(""));
-                bean.setPurpose((String) map.get(""));
+                bean.setId((Integer) map.get("id"));
+                bean.setSN((String) map.get("sn"));
+                bean.setTown((String) map.get("town"));
+                bean.setName((String) map.get("name"));
+                bean.setPos((String) map.get("pos"));
+                bean.setSituation((String) map.get("situation"));
+                bean.setX((String) map.get("x"));
+                bean.setY((String) map.get("y"));
+                bean.setComment((String) map.get("comment"));
+                bean.setImages((String) map.get("images"));
+                bean.setPerson((String) map.get("person"));
+                bean.setPurpose((String) map.get("purpose"));
                 farmingAgricultureDao.insertPoolBay(bean);
+            }
+        }
+    }
+
+    //垃圾清运
+    //每天1点40分执行一次
+    @Scheduled(cron ="0 25 1 * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertRubbishClear() throws Exception {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "5000");
+        Map<String, String> head = new HashMap<String, String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/RubbishClear", parameters, head);
+        if (null != result) {
+            log.info("#######" + "垃圾清运");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                RubbishClear bean =new RubbishClear();
+                bean.setId((Integer) map.get("id"));
+                bean.setSN((String) map.get("sn"));
+                bean.setTown((String) map.get("town"));
+                bean.setVillageName((String) map.get("villageName"));
+                bean.setName((String) map.get("name"));
+                bean.setX((String) map.get("x"));
+                bean.setY((String) map.get("y"));
+                bean.setPos((String) map.get("pos"));
+                bean.setSituation((String) map.get("situation"));
+                bean.setTexture((String) map.get("texture"));
+                bean.setDesc((String) map.get("desc"));
+                bean.setImageNo((String) map.get("imageNo"));
+                bean.setImageUrl((String) map.get("imageUrl"));
+                farmingAgricultureDao.insertRubbishClear(bean);
             }
         }
     }

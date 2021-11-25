@@ -280,4 +280,38 @@
          now()
         )
     </insert>
+
+    <insert id="insertRubbishClear" parameterType="cn.stephen.study.htapitoproject.entity.RubbishClear">
+       insert  IGNORE into api_rubbishclear(
+		Id	,
+		SN	,
+		Town	,
+		VillageName	,
+		Name	,
+		X	,
+		Y	,
+		Pos	,
+		Situation	,
+		Texture	,
+		Desc	,
+		ImageNo	,
+		ImageUrl    ,
+		EtlTime
+       )values (
+         #{Id},
+         #{SN},
+         #{Town},
+         #{VillageName},
+         #{Name},
+         #{X},
+         #{Y},
+         #{Pos},
+         #{Situation},
+         #{Texture},
+         #{Desc},
+         #{ImageNo},
+         #{ImageUrl},
+         now()
+       )
+    </insert>
 </mapper>

@@ -1,10 +1,7 @@
 package cn.stephen.study.htapitoproject.service;
 
 import cn.stephen.study.htapitoproject.dao.BeadHousePersonDao;
-import cn.stephen.study.htapitoproject.entity.AllPopul;
-import cn.stephen.study.htapitoproject.entity.BeadHousePerson;
-import cn.stephen.study.htapitoproject.entity.CommunityPopul;
-import cn.stephen.study.htapitoproject.entity.KeyPopul;
+import cn.stephen.study.htapitoproject.entity.*;
 import cn.stephen.study.htapitoproject.utils.HttpUtil;
 import cn.stephen.study.htapitoproject.utils.JsonUtils;
 import com.alibaba.fastjson.JSONArray;
@@ -192,4 +189,59 @@ public class BeadHousePersonService {
             }
         }
     }
+
+    @Scheduled(cron ="0 20 1 * * ?")
+    //扶贫数据
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertPoverty() throws Exception {
+        Map<String,String> parameters=new HashMap<String,String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "10000");
+        Map<String,String> head=new HashMap<String,String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Poverty", parameters,head);
+        if(null !=result) {
+            log.info("######"+"扶贫数据");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                Poverty bean=new Poverty();
+                bean.setId((Integer) map.get("id"));
+                bean.setType((String) map.get("type"));
+                bean.setCity((String) map.get("city"));
+                bean.setTown((String) map.get("town"));
+                bean.setAdminVillage((String) map.get("adminVillage"));
+                bean.setNaturalVillage((String) map.get("naturalVillage"));
+                bean.setHouseholdNo((String) map.get("householdNo"));
+                bean.setPersonCode((String) map.get("personCode"));
+                bean.setName((String) map.get("name"));
+                bean.setIdCardNo((String) map.get("idCardNo"));
+                bean.setNumOfPeople((String) map.get("numOfPeople"));
+                bean.setRelation((String) map.get("relation"));
+                bean.setNation((String) map.get("nation"));
+                bean.setEducationalLevel((String) map.get("educationalLevel"));
+                bean.setStudentStatus((String) map.get("studentStatus"));
+                bean.setHealthCondition((String) map.get("healthCondition"));
+                bean.setSkills((String) map.get("skills"));
+                bean.setWorkingCondition((String) map.get("workingCondition"));
+                bean.setWorkingTime((String) map.get("workingTime"));
+                bean.setHasDBYL((String) map.get("hasDBYL"));
+                bean.setOffPoverty((String) map.get("offPoverty"));
+                bean.setOffPovertyYear((String) map.get("offPovertyYear"));
+                bean.setPovertyLevel((String) map.get("povertyLevel"));
+                bean.setPovertyCauses((String) map.get("povertyCauses"));
+                bean.setDangerousBuilding((String) map.get("dangerousBuilding"));
+                bean.setHasSafeWater((String) map.get("hasSafeWater"));
+                bean.setPerIncome((String) map.get("perIncome"));
+                bean.setPhone((String) map.get("phone"));
+                bean.setRemark((String) map.get("remark"));
+                bean.setZiLiNengLi((String) map.get("ziLiNengLi"));
+                bean.setJianHuRen((String) map.get("jianHuRen"));
+                bean.setJianHuRenPhone((String) map.get("jianHuRenPhone"));
+                beadHousePersonDao.insertPoverty(bean);
+            }
+        }
+    }
+
+
 }

@@ -1,9 +1,6 @@
 package cn.stephen.study.htapitoproject.dao;
 
-import cn.stephen.study.htapitoproject.entity.AllPopul;
-import cn.stephen.study.htapitoproject.entity.BeadHousePerson;
-import cn.stephen.study.htapitoproject.entity.CommunityPopul;
-import cn.stephen.study.htapitoproject.entity.KeyPopul;
+import cn.stephen.study.htapitoproject.entity.*;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -20,4 +17,6 @@ public interface BeadHousePersonDao {
     void insertKeypopul(KeyPopul bean);
 
     void insertAllpopul(AllPopul bean);
+    //扶贫数据
+    void insertPoverty(Poverty bean);
 }

@@ -44,15 +44,16 @@ public class HttpTestService {
        String s="Id\n" +
                "SN\n" +
                "Town\n" +
+               "VillageName\n" +
                "Name\n" +
-               "Pos\n" +
-               "Situation\n" +
                "X\n" +
                "Y\n" +
-               "Comment\n" +
-               "images\n" +
-               "Person\n" +
-               "Purpose\n" +
+               "Pos\n" +
+               "Situation\n" +
+               "Texture\n" +
+               "Desc\n" +
+               "ImageNo\n" +
+               "ImageUrl\n" +
                "EtlTime\n";
        for (String slist : s.split("\n")) {
           //System.out.println("private String "+slist+";");
