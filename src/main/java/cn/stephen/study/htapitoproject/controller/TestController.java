@@ -20,7 +20,7 @@ public class TestController {
 
     @RequestMapping(value = "/get/{id}",method = RequestMethod.GET)
     public TestEntity test(@PathVariable Integer id){
-        log.info("id:" + id);
+        log.info("参数id:" + id);
         return testService.getById(id);
     }
 

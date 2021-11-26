@@ -314,4 +314,110 @@
          now()
        )
     </insert>
+
+    <insert id="insertWaterWell" parameterType="cn.stephen.study.htapitoproject.entity.WaterWell">
+        insert IGNORE into api_waterwell(
+ 		ID	,
+		SmX	,
+		SmY	,
+		SmLibTileID	,
+		SmUserID	,
+		SmGeometrySize	,
+		SmGeoPosition	,
+		DotNo	,
+		VillageName	,
+		WellCode	,
+		Name	,
+		Pos	,
+		Depth	,
+		WaterLevel	,
+		ImageNo	,
+		Town	,
+		Phone	,
+		comment	,
+		EtlTime
+        )values (
+         #{ID},
+         #{SmX},
+         #{SmY},
+         #{SmLibTileID},
+         #{SmUserID},
+         #{SmGeometrySize},
+         #{SmGeoPosition},
+         #{DotNo},
+         #{VillageName},
+         #{WellCode},
+         #{Name},
+         #{Pos},
+         #{Depth},
+         #{WaterLevel},
+         #{ImageNo},
+         #{Town},
+         #{Phone},
+         #{comment},
+         now()
+        )
+    </insert>
+
+    <insert id="insertXinJiaoRenYuan" parameterType="cn.stephen.study.htapitoproject.entity.XinJiaoRenYuan">
+        insert IGNORE into api_xinjiaorenyuan(
+		Id	,
+		Name	,
+		Gender	,
+		Phone	,
+		MinZu	,
+		WenHuaChengDu	,
+		ZhengZhiMianMao	,
+		GongZuoDanWeiZhiWu	,
+		XinYangZongJiao	,
+		IdCardNo	,
+		HuJiDi	,
+		XianJuZhuDi	,
+		JuHuiDiDian	,
+		Town	,
+		VillageName	,
+		EtlTime
+        )values (
+         #{Id},
+         HEX(AES_ENCRYPT(#{Name},'e' )),
+         #{Gender},
+         HEX(AES_ENCRYPT(#{Phone},'e' )),
+         #{MinZu},
+         #{WenHuaChengDu},
+         #{ZhengZhiMianMao},
+         #{GongZuoDanWeiZhiWu},
+         #{XinYangZongJiao},
+         HEX(AES_ENCRYPT(#{IdCardNo},'e' )),
+         #{HuJiDi},
+         #{XianJuZhuDi},
+         #{JuHuiDiDian},
+         #{Town},
+         #{VillageName},
+         now()
+        )
+    </insert>
+
+    <insert id="insertZhongLiangDaHu" parameterType="cn.stephen.study.htapitoproject.entity.ZhongLiangDaHu">
+        insert IGNORE into api_zhongliangdahu(
+		Id	,
+		AuditState	,
+		Town	,
+		VillageName	,
+		Name	,
+		Area	,
+		Varieties	,
+		Phone	,
+		EtlTime
+        )values (
+         #{Id},
+         #{AuditState},
+         #{Town},
+         #{VillageName},
+         HEX(AES_ENCRYPT(#{Name},'e' )),
+         #{Area},
+         #{Varieties},
+         HEX(AES_ENCRYPT(#{Phone},'e' )),
+         now()
+        )
+    </insert>
 </mapper>

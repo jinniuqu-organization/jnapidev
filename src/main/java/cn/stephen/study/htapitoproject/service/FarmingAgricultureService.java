@@ -323,4 +323,110 @@ public class FarmingAgricultureService {
         }
     }
 
+    //水井
+    //每天2点55分执行一次
+    @Scheduled(cron ="0 55 2 * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertWaterWell() throws Exception {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "10000");
+        Map<String, String> head = new HashMap<String, String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/WaterWell", parameters, head);
+        if (null != result) {
+            log.info("#######" + "水井");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                WaterWell bean=new WaterWell();
+                bean.setID((Integer) map.get("id"));
+                bean.setSmX((String) map.get("smX"));
+                bean.setSmY((String) map.get("smY"));
+                bean.setSmLibTileID((String) map.get("smLibTileID"));
+                bean.setSmUserID((String) map.get("smUserID"));
+                bean.setSmGeometrySize((String) map.get("smGeometrySize"));
+                bean.setSmGeoPosition((String) map.get("smGeoPosition"));
+                bean.setDotNo((String) map.get("dotNo"));
+                bean.setVillageName((String) map.get("villageName"));
+                bean.setWellCode((String) map.get("wellCode"));
+                bean.setName((String) map.get("name"));
+                bean.setPos((String) map.get("pos"));
+                bean.setDepth((String) map.get("depth"));
+                bean.setWaterLevel((String) map.get("waterLevel"));
+                bean.setImageNo((String) map.get("imageNo"));
+                bean.setTown((String) map.get("town"));
+                bean.setPhone((String) map.get("phone"));
+                bean.setComment((String) map.get("comment"));
+                farmingAgricultureDao.insertWaterWell(bean);
+            }
+        }
+    }
+
+    //信教人员
+    //每天2点50分执行一次
+    @Scheduled(cron ="0 50 2 * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertXinJiaoRenYuan() throws Exception {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "1000");
+        Map<String, String> head = new HashMap<String, String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/XinJiaoRenYuan", parameters, head);
+        if (null != result) {
+            log.info("#######" + "信教人员");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                XinJiaoRenYuan bean =new XinJiaoRenYuan();
+                bean.setId((String) map.get("id"));
+                bean.setName((String) map.get("name"));
+                bean.setGender((String) map.get("gender"));
+                bean.setPhone((String) map.get("phone"));
+                bean.setMinZu((String) map.get("minZu"));
+                bean.setWenHuaChengDu((String) map.get("wenHuaChengDu"));
+                bean.setZhengZhiMianMao((String) map.get("zhengZhiMianMao"));
+                bean.setGongZuoDanWeiZhiWu((String) map.get("gongZuoDanWeiZhiWu"));
+                bean.setXinYangZongJiao((String) map.get("xinYangZongJiao"));
+                bean.setIdCardNo((String) map.get("idCardNo"));
+                bean.setHuJiDi((String) map.get("huJiDi"));
+                bean.setXianJuZhuDi((String) map.get("xianJuZhuDi"));
+                bean.setJuHuiDiDian((String) map.get("juHuiDiDian"));
+                bean.setTown((String) map.get("town"));
+                bean.setVillageName((String) map.get("villageName"));
+                farmingAgricultureDao.insertXinJiaoRenYuan(bean);
+            }
+        }
+    }
+
+    //种粮大户
+    //每天2点50分执行一次
+    @Scheduled(cron ="0 20 2 * * ?")
+    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void insertZhongLiangDaHu() throws Exception {
+        Map<String, String> parameters = new HashMap<String, String>();
+        parameters.put("page", "1");
+        parameters.put("pagesize", "500");
+        Map<String, String> head = new HashMap<String, String>();
+        head.put("Authorization", token);
+        String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/ZhongLiangDaHu", parameters, head);
+        if (null != result) {
+            log.info("#######" + "种粮大户");
+            Object itemObj = JsonUtils.getObject(result, "$.data");
+            List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
+            for (Map map : list) {
+                ZhongLiangDaHu bean=new ZhongLiangDaHu();
+                bean.setId((Integer) map.get("id"));
+                bean.setAuditState((String) map.get("auditState"));
+                bean.setTown((String) map.get("town"));
+                bean.setVillageName((String) map.get("villageName"));
+                bean.setName((String) map.get("name"));
+                bean.setArea((String) map.get("area"));
+                bean.setVarieties((String) map.get("varieties"));
+                bean.setPhone((String) map.get("phone"));
+                farmingAgricultureDao.insertZhongLiangDaHu(bean);
+            }
+        }
+    }
 }

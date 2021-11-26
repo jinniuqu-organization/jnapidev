@@ -42,23 +42,18 @@ public class HttpTestService {
     }*/
    public static void main(String[] args) {
        String s="Id\n" +
-               "SN\n" +
+               "AuditState\n" +
                "Town\n" +
                "VillageName\n" +
                "Name\n" +
-               "X\n" +
-               "Y\n" +
-               "Pos\n" +
-               "Situation\n" +
-               "Texture\n" +
-               "Desc\n" +
-               "ImageNo\n" +
-               "ImageUrl\n" +
+               "Area\n" +
+               "Varieties\n" +
+               "Phone\n" +
                "EtlTime\n";
        for (String slist : s.split("\n")) {
           //System.out.println("private String "+slist+";");
           //System.out.println("bean.set"+slist+"((String) map.get("+"\"\""+"));");
-           System.out.println("         "+"#{"+slist+"},");
+            System.out.println("         "+"#{"+slist+"},");
        }
    }
 

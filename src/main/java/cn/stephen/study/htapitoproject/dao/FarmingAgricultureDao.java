@@ -23,4 +23,10 @@ public interface FarmingAgricultureDao {
     void insertPoolBay(PoolBay bean);
     //垃圾清运
     void insertRubbishClear(RubbishClear bean);
+    //水井
+    void insertWaterWell(WaterWell bean);
+    //信教人员
+    void insertXinJiaoRenYuan(XinJiaoRenYuan bean);
+    //种粮大户
+    void insertZhongLiangDaHu(ZhongLiangDaHu bean);
 }
