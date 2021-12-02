@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class ZhongLiangDaHu {
     private Integer Id;
-    private String AuditState;
+    private Integer AuditState;
     private String Town;
     private String VillageName;
     private String Name;

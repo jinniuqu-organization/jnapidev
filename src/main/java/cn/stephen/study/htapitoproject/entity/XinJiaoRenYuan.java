@@ -8,7 +8,7 @@ import lombok.Data;
  */
 @Data
 public class XinJiaoRenYuan {
-    private String Id;
+    private Integer Id;
     private String Name;
     private String Gender;
     private String Phone;

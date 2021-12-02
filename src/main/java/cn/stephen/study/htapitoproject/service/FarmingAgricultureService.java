@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Acthor Tao.Lee @date 2021/11/22 11:30
+ * @Acthor Tao.Lee
+ * @date 2021/11/22 11:30
  * @Description 养殖农业统一业务层
  */
 @Slf4j
@@ -291,6 +292,7 @@ public class FarmingAgricultureService {
     //垃圾清运
     //每天1点40分执行一次
     @Scheduled(cron ="0 25 1 * * ?")
+    //@Scheduled(cron ="0 * * * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void insertRubbishClear() throws Exception {
         Map<String, String> parameters = new HashMap<String, String>();
@@ -315,7 +317,6 @@ public class FarmingAgricultureService {
                 bean.setPos((String) map.get("pos"));
                 bean.setSituation((String) map.get("situation"));
                 bean.setTexture((String) map.get("texture"));
-                bean.setDesc((String) map.get("desc"));
                 bean.setImageNo((String) map.get("imageNo"));
                 bean.setImageUrl((String) map.get("imageUrl"));
                 farmingAgricultureDao.insertRubbishClear(bean);
@@ -380,7 +381,7 @@ public class FarmingAgricultureService {
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
             for (Map map : list) {
                 XinJiaoRenYuan bean =new XinJiaoRenYuan();
-                bean.setId((String) map.get("id"));
+                bean.setId((Integer) map.get("id"));
                 bean.setName((String) map.get("name"));
                 bean.setGender((String) map.get("gender"));
                 bean.setPhone((String) map.get("phone"));
@@ -418,7 +419,7 @@ public class FarmingAgricultureService {
             for (Map map : list) {
                 ZhongLiangDaHu bean=new ZhongLiangDaHu();
                 bean.setId((Integer) map.get("id"));
-                bean.setAuditState((String) map.get("auditState"));
+                bean.setAuditState((Integer) map.get("auditState"));
                 bean.setTown((String) map.get("town"));
                 bean.setVillageName((String) map.get("villageName"));
                 bean.setName((String) map.get("name"));

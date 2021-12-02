@@ -293,7 +293,6 @@
 		Pos	,
 		Situation	,
 		Texture	,
-		Desc	,
 		ImageNo	,
 		ImageUrl    ,
 		EtlTime
@@ -308,7 +307,6 @@
          #{Pos},
          #{Situation},
          #{Texture},
-         #{Desc},
          #{ImageNo},
          #{ImageUrl},
          now()

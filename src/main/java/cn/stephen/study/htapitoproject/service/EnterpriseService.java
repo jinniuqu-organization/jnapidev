@@ -42,7 +42,7 @@ public class EnterpriseService {
         Map<String, String> head = new HashMap<String, String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Enterprise", parameters, head);
-        log.info("######" + "企业数据");
+        log.info("#######" + "企业数据");
         if (null != result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);

@@ -44,7 +44,7 @@ public class BeadHousePersonService {
         Map<String,String> head=new HashMap<String,String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/BeadHousePerson", parameters,head);
-        log.info("#######"+"养老院人口");
+        log.info("########"+"养老院人口");
         if(null !=result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -82,7 +82,7 @@ public class BeadHousePersonService {
         Map<String,String> head=new HashMap<String,String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/CommunityPopul", parameters,head);
-        log.info("######"+"社区人口");
+        log.info("#######"+"社区人口");
         if(null !=result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -132,7 +132,7 @@ public class BeadHousePersonService {
         Map<String,String> head=new HashMap<String,String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/KeyPopul", parameters,head);
-        log.info("######"+"key人口");
+        log.info("#######"+"key人口");
         if(null !=result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -165,7 +165,7 @@ public class BeadHousePersonService {
         Map<String,String> head=new HashMap<String,String>();
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Popul", parameters,head);
-        log.info("######"+"总人口");
+        log.info("#######"+"总人口");
         if(null !=result) {
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
@@ -201,7 +201,7 @@ public class BeadHousePersonService {
         head.put("Authorization", token);
         String result = HttpUtil.sendGet("http://10.136.130.194:10013/api/Poverty", parameters,head);
         if(null !=result) {
-            log.info("######"+"扶贫数据");
+            log.info("#######"+"扶贫数据");
             Object itemObj = JsonUtils.getObject(result, "$.data");
             List<Map> list = JSONArray.parseArray(itemObj.toString(), Map.class);
             for (Map map : list) {
