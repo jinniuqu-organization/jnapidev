@@ -25,8 +25,26 @@ public class TruncateTable {
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void truncateAllTable() throws Exception {
         log.info("######开始清空表");
-        truncateTableDao.truncathAllTable();
-        log.info("######清空表完成");
+        String tablelist="api_beadhouseperson\n" +
+                "api_communitypopul\n" +
+                "api_keypopul\n" +
+                "api_allpopul\n" +
+                "api_poverty\n" +
+                "api_enterprise\n" +
+                "api_farm\n" +
+                "api_housing\n" +
+                "api_idlecourtyard\n" +
+                "api_latrinereform\n" +
+                "api_ninesmallplaces\n" +
+                "api_poolbay\n" +
+                "api_rubbishclear\n" +
+                "api_waterwell\n" +
+                "api_xinjiaorenyuan\n" +
+                "api_zhongliangdahu\n";
+        for (String tablename : tablelist.split("\n")) {
+            truncateTableDao.truncathAllTable(tablename);
+            log.info("######清空表完成"+tablename);
+        }
     }
 
 

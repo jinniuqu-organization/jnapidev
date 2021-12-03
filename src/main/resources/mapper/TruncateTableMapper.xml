@@ -2,23 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.stephen.study.htapitoproject.dao.TruncateTableDao">
 
-    <update id="truncathAllTable">
-        truncate table api_beadhouseperson;
-        truncate table api_communitypopul;
-        truncate table api_keypopul;
-        truncate table api_allpopul;
-        truncate table api_poverty;
-        truncate table api_enterprise;
-        truncate table api_farm;
-        truncate table api_housing;
-        truncate table api_idlecourtyard;
-        truncate table api_latrinereform;
-        truncate table api_ninesmallplaces;
-        truncate table api_poolbay;
-        truncate table api_rubbishclear;
-        truncate table api_waterwell;
-        truncate table api_xinjiaorenyuan;
-        truncate table api_zhongliangdahu;
+    <update id="truncathAllTable" parameterType="String">
+        truncate table #{tablename}
     </update>
 
 </mapper>

@@ -10,5 +10,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TruncateTableDao {
     //清空所有表
-    void truncathAllTable();
+    void truncathAllTable(String tablename);
 }
