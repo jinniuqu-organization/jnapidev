@@ -3,7 +3,7 @@
 <mapper namespace="cn.stephen.study.htapitoproject.dao.TruncateTableDao">
 
     <update id="truncathAllTable" parameterType="String">
-        truncate table #{tablename}
+        truncate table replace(${tablename},'''','')
     </update>
 
 </mapper>
