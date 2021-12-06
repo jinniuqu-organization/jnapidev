@@ -1,6 +1,7 @@
 package cn.stephen.study.htapitoproject.service;
 
 import cn.stephen.study.htapitoproject.dao.TruncateTableDao;
+import cn.stephen.study.htapitoproject.entity.SubTable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ public class TruncateTable {
     @Resource
     private TruncateTableDao truncateTableDao;
 
+    //@Scheduled(cron ="0 * * * * ?")
     @Scheduled(cron ="0 35 23 * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void truncateAllTable() throws Exception {

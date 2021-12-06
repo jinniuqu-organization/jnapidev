@@ -1,6 +1,8 @@
 package cn.stephen.study.htapitoproject.dao;
 
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @Acthor Tao.Lee
@@ -10,5 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TruncateTableDao {
     //清空所有表
-    void truncathAllTable(String tablename);
+    void truncathAllTable(@Param(value = "tablename") String tablename);
 }
