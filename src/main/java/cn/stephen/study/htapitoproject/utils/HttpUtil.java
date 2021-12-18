@@ -1,12 +1,18 @@
 package cn.stephen.study.htapitoproject.utils;
 
 
+
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -15,19 +21,25 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 
-
+@Slf4j
 /**
  * @Acthor Tao.Lee @date 2021/11/18 10:44
  * @Description http请求工具核心类
  */
 public class HttpUtil {
+
+    private static int SocketTimeout = 30000;//3秒
+    private static int ConnectTimeout = 30000;//3秒
+    private static Boolean SetTimeOut = true;
 
     /**
      * 方法描述: 发送get请求
@@ -64,6 +76,7 @@ public class HttpUtil {
                     httpGet.setHeader(entry.getKey(), entry.getValue());
                 }
             }
+
             HttpResponse response = httpClient.execute(httpGet);
 
             int statusCode = response.getStatusLine().getStatusCode();
@@ -81,6 +94,8 @@ public class HttpUtil {
         }
         return body;
     }
+
+
 
     /**
      * 方法描述: 发送post请求-json数据

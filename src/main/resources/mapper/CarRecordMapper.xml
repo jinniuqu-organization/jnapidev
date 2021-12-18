@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.stephen.study.htapitoproject.dao.EnterpriseDao">
+
+    <insert id="inserCarRecord" parameterType="cn.stephen.study.htapitoproject.entity.CarRecord">
+        insert IGNORE into api_carrecord(
+ 			id		,
+			capTimeStr		,
+			carBrand		,
+			carColor		,
+			carDirect		,
+			carDirectStr		,
+			carImgUrl		,
+			carInnerCategory		,
+			carNum		,
+			carNumPic		,
+			carNumcolor		,
+			carType		,
+			carWayCode		,
+			devChnId		,
+			devChnName		,
+			devChnNum		,
+			devId		,
+			devName		,
+			draw		,
+			originalPicPath		,
+			parkingLot		,
+			parkingLotCode		,
+			realCapturePicPath		,
+			strobeState		,
+			etl_time
+        )values (
+         #{id},
+         #{capTimeStr},
+         #{carBrand},
+         #{carColor},
+         #{carDirect},
+         #{carDirectStr},
+         #{carImgUrl},
+         #{carInnerCategory},
+         #{carNum},
+         #{carNumPic},
+         #{carNumcolor},
+         #{carType},
+         #{carWayCode},
+         #{devChnId},
+         #{devChnName},
+         #{devChnNum},
+         #{devId},
+         #{devName},
+         #{draw},
+         #{originalPicPath},
+         #{parkingLot},
+         #{parkingLotCode},
+         #{realCapturePicPath},
+         #{strobeState},
+         now()
+        )
+
+    </insert>
+
+</mapper>

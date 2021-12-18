@@ -9,9 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @Acthor Tao.Lee @date 2021/11/18 11:18
@@ -41,20 +40,44 @@ public class HttpTestService {
         }
     }*/
    public static void main(String[] args) {
-       String s="Id\n" +
-               "AuditState\n" +
-               "Town\n" +
-               "VillageName\n" +
-               "Name\n" +
-               "Area\n" +
-               "Varieties\n" +
-               "Phone\n" +
-               "EtlTime\n";
+       String s="id\n" +
+               "capTimeStr\n" +
+               "carBrand\n" +
+               "carColor\n" +
+               "carDirect\n" +
+               "carDirectStr\n" +
+               "carImgUrl\n" +
+               "carInnerCategory\n" +
+               "carNum\n" +
+               "carNumPic\n" +
+               "carNumcolor\n" +
+               "carType\n" +
+               "carWayCode\n" +
+               "devChnId\n" +
+               "devChnName\n" +
+               "devChnNum\n" +
+               "devId\n" +
+               "devName\n" +
+               "draw\n" +
+               "originalPicPath\n" +
+               "parkingLot\n" +
+               "parkingLotCode\n" +
+               "realCapturePicPath\n" +
+               "strobeState\n";
        for (String slist : s.split("\n")) {
           //System.out.println("private String "+slist+";");
           //System.out.println("bean.set"+slist+"((String) map.get("+"\"\""+"));");
-            System.out.println("         "+"#{"+slist+"},");
+           // System.out.println("         "+"#{"+slist+"},");
        }
+       SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+       //Date queryTimeBegin=new Date();
+       String queryTimeBeginStr=sdf.format(new Date());
+       System.out.println(queryTimeBeginStr);
+       Calendar calendar = new GregorianCalendar();
+       calendar.setTime(new Date());
+       calendar.add(calendar.HOUR_OF_DAY,-1);
+       String date2= sdf.format(calendar.getTime());
+       System.out.println(date2.replaceAll(" ","%20"));
    }
 
 }
