@@ -11,8 +11,8 @@ import java.util.Date;
  */
 @Data
 public class CarRecord {
-    private String id;
-    private Date capTimeStr;
+    private Long id;
+    private String capTimeStr;
     private Integer carBrand;
     private Integer carColor;
     private String carDirect;
@@ -21,15 +21,15 @@ public class CarRecord {
     private Integer carInnerCategory;
     private String carNum;
     private String carNumPic;
-    private String carNumcolor;
-    private String carType;
+    private Integer carNumcolor;
+    private Integer carType;
     private String carWayCode;
     private String devChnId;
     private String devChnName;
     private Integer devChnNum;
     private String devId;
     private String devName;
-    private String draw;
+    private Integer draw;
     private String originalPicPath;
     private String parkingLot;
     private String parkingLotCode;

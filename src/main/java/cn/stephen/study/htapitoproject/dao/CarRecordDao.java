@@ -11,6 +11,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CarRecordDao {
 
-    void inserCarRecord(CarRecord bean);
+    void insertCarRecord(CarRecord bean);
 
 }
