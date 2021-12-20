@@ -1,3 +1,5 @@
 # htapitomysql
 java接入http接口存入mysql
 111
+车辆记录库ht_apicardb
+人口库ht_apidb
