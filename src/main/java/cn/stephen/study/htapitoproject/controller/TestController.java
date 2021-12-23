@@ -2,6 +2,7 @@ package cn.stephen.study.htapitoproject.controller;
 
 
 import cn.stephen.study.htapitoproject.entity.TestEntity;
+import cn.stephen.study.htapitoproject.service.CaseService;
 import cn.stephen.study.htapitoproject.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,11 @@ public class TestController {
     @Autowired
     private TestService testService ;
 
-    @RequestMapping(value = "/get/{id}",method = RequestMethod.GET)
-    public TestEntity test(@PathVariable Integer id){
-        log.info("参数id:" + id);
-        return testService.getById(id);
+    @Autowired
+    private CaseService caseService;
+    @RequestMapping(value = "/get",method = RequestMethod.GET)
+    public void test() throws Exception {
+        caseService.insertCaseData();
     }
 
 }
