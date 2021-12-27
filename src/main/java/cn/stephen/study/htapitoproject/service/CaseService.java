@@ -55,8 +55,8 @@ public class CaseService {
 
     private static final String AESKEY = "1234567887654321";
 
-    //每天早晨一点执行
-    @Scheduled(cron = "0 0 1 * * ?")
+    //每一个小时执行一次
+    @Scheduled(cron = "0 0 * * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void insertCaseData() throws Exception {
 
