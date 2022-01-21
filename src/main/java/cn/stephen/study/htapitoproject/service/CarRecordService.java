@@ -34,7 +34,7 @@ public class CarRecordService {
     private CarRecordDao CarRecordDao;
 
     //十分钟跑一次前一个小时的数据
-    @Scheduled(cron = "0 */12 * * * ?")
+    //@Scheduled(cron = "0 */12 * * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void inserCarRecord() throws Exception {
         Map<String, String> parameters = new HashMap<String, String>();
