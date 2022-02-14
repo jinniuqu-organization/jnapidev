@@ -34,7 +34,7 @@ public class CarRecordService {
     private CarRecordDao CarRecordDao;
 
     //十分钟跑一次前一个小时的数据
-    //@Scheduled(cron = "0 */12 * * * ?")
+    @Scheduled(cron = "0 */12 * * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void inserCarRecord() throws Exception {
         Map<String, String> parameters = new HashMap<String, String>();
@@ -51,7 +51,7 @@ public class CarRecordService {
         Map<String, String> head = new HashMap<String, String>();
         head.put("accessToken", accessToken);
         //String result = HttpsUtil.httpsGet("http://223.99.14.39:80/ipms/carcapture/find/conditions", parameters, head);
-        String result = HttpsUtil.httpsGet("http://10.136.245.212:80/ipms/carcapture/find/conditions", parameters, head);
+        String result = HttpsUtil.httpsGet("https://10.136.245.212/ipms/carcapture/find/conditions", parameters, head);
         HashMap itemObj1 = (HashMap) JsonUtils.getObject(result, "$.data");
         //log.info(itemObj1.toString());
         //List<Student> studentList1 = JSON.parseArray(JSON.parseObject(json).getString("studentList"), Student.class);

@@ -6,6 +6,7 @@ cn\stephen\study\htapitoproject\service\TestService.class
 cn\stephen\study\htapitoproject\utils\AESUtil.class
 cn\stephen\study\htapitoproject\service\EnterpriseService.class
 cn\stephen\study\htapitoproject\utils\HttpUtil.class
+cn\stephen\study\htapitoproject\kafka\KafkaConsumerFactory.class
 cn\stephen\study\htapitoproject\utils\MD5Util.class
 cn\stephen\study\htapitoproject\service\CarRecordService.class
 cn\stephen\study\htapitoproject\config\service\TransactionManagementConfiguration.class
@@ -19,9 +20,11 @@ cn\stephen\study\htapitoproject\service\CaseService.class
 cn\stephen\study\htapitoproject\service\BeadHousePersonService.class
 cn\stephen\study\htapitoproject\entity\Farm.class
 cn\stephen\study\htapitoproject\HtapitojectApplication.class
+cn\stephen\study\htapitoproject\kafka\KafkaConsumerQueue.class
 cn\stephen\study\htapitoproject\config\dao\SessionFactoryConfiguration.class
 cn\stephen\study\htapitoproject\utils\SSLClient$1.class
 cn\stephen\study\htapitoproject\entity\NineSmallPlaces.class
+cn\stephen\study\htapitoproject\kafka\KafkaProducer$DemoProducerCallback.class
 cn\stephen\study\htapitoproject\entity\TestEntity.class
 cn\stephen\study\htapitoproject\entity\XinJiaoRenYuan.class
 cn\stephen\study\htapitoproject\entity\PoolBay.class
@@ -42,8 +45,10 @@ cn\stephen\study\htapitoproject\entity\CommunityPopul.class
 cn\stephen\study\htapitoproject\entity\AllPopul.class
 cn\stephen\study\htapitoproject\entity\WaterWell.class
 cn\stephen\study\htapitoproject\dao\BeadHousePersonDao.class
+cn\stephen\study\htapitoproject\kafka\KafkaProducer.class
 cn\stephen\study\htapitoproject\service\FarmingAgricultureService.class
 cn\stephen\study\htapitoproject\utils\JsonUtils.class
+cn\stephen\study\htapitoproject\kafka\KafkaConsumer.class
 cn\stephen\study\htapitoproject\dao\EnterpriseDao.class
 cn\stephen\study\htapitoproject\utils\SSLClient.class
 cn\stephen\study\htapitoproject\entity\Case.class
