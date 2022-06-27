@@ -22,7 +22,7 @@ public class TruncateTable {
     private TruncateTableDao truncateTableDao;
 
     //@Scheduled(cron ="0 * * * * ?")
-    @Scheduled(cron ="0 35 23 * * ?")
+    //@Scheduled(cron ="0 35 23 * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void truncateAllTable() throws Exception {
         log.info("######开始清空表");

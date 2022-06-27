@@ -1,8 +1,6 @@
-# htapitomysql
-java接入http接口存入mysql
-111
-车辆记录库ht_apicardb
-人口库ht_apidb
+# Jnapitomysql
+Java接入http接口存入mysql
+Java接入Kafka消息存入mysql
 #git与GitHub相关的
 1.点开邮箱，找到github发送的邮件，加入组织
 2.删除项目底下的 .git 文件
