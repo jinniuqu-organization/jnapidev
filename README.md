@@ -9,7 +9,7 @@ Java接入Kafka消息存入mysql
 5.　 git add . 
 　　git commit -m "自己"
       git remote rm origin
-      git remote add origin https://github.com/huantaixian/htapitomysql.git
+      git remote add origin https://github.com/jinniuqu-organization/Jnapitomysql.git
       git remote set-url origin https://你的GitHubSSH Key@github.com/jinniuqu-organization/Jnapitomysql.git 
       #具体可以参考网址https://www.cnblogs.com/kermitjam/p/10697185.html
       git branch -M main

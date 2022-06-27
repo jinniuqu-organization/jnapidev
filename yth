@@ -1,1 +1,7 @@
-ugiukgiui
+流程：
+再idea里面选择git - commit -提交备注
+在git.exe里面
+先下载最新的文件
+git pull
+再上传
+git push -u origin main
