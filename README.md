@@ -10,10 +10,14 @@ Java接入Kafka消息存入mysql
 　　git commit -m "自己"
       git remote rm origin
       git remote add origin https://github.com/jinniuqu-organization/Jnapitomysql.git
-      git remote set-url origin https://你的GitHubSSH Key@github.com/jinniuqu-organization/Jnapitomysql.git 
+      git remote set-url origin https://你的GitHubSSH Key@github.com/jinniuqu-organization/jnapitomysql.git 
       #具体可以参考网址https://www.cnblogs.com/kermitjam/p/10697185.html
       git branch -M main
       git push  origin main
-6.提交完后下载先更新别人的代码 git pull 
- 再先在git里面提交community 
- 后面再git push  origin main
+6.提交代码流程：
+再idea里面选择git - commit -提交备注
+在git.exe里面
+先下载最新的文件
+git pull
+再上传
+git push -u origin main
