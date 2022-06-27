@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>cn.stephen.study</groupId>
-	<artifactId>htapitoproject</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>jnapitoproject</artifactId>
+	<version>0.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>htapitoproject</name>
+	<name>jnapitoproject</name>
 	<description>Api project for Spring Boot</description>
 
 	<properties>
