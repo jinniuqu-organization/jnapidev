@@ -24,7 +24,7 @@ public class KafkaConsumerQueue {
 
     @Async
     //一直执行，但是一小时再检查启动一次
-    @Scheduled(cron = "0 0 * * * ?")
+    //@Scheduled(cron = "0 0 * * * ?")
     public void task() {
         if (RUN) {
             return;

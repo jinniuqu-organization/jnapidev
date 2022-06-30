@@ -33,7 +33,7 @@ public class EnterpriseService {
     private EnterpriseDao enterpriseDao;
 
     //企业数据
-    @Scheduled(cron = "0 15 2 * * ?")
+    //@Scheduled(cron = "0 15 2 * * ?")
     @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void insertEnterprise() throws Exception {
         Map<String, String> parameters = new HashMap<String, String>();

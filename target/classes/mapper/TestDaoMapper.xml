@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.stephen.study.htapitoproject.dao.TestDao">
+<mapper namespace="cn.lee.study.Jnapitoproject.dao.TestDao">
     <!-- 根据主键查询-->
-    <select id="getById" resultType="cn.stephen.study.htapitoproject.entity.TestEntity" parameterType="java.lang.Integer" >
+    <select id="getById" resultType="cn.lee.study.Jnapitoproject.entity.TestEntity" parameterType="java.lang.Object" >
         select  *
-        from test_springboot
+        from device
         where id = #{id}
     </select>
 
     <!--插入-->
-    <insert id="insert" parameterType="cn.stephen.study.htapitoproject.entity.TestEntity">
-        insert into test_springboot(
-        first_name,last_name
-        )values (
-        #{firstName},#{lastName}
+    <insert id="insert" parameterType="cn.lee.study.Jnapitoproject.entity.TestEntity">
+        insert into devicevalues (
+        null,#{username},#{ts},now()
         )
     </insert>
 </mapper>

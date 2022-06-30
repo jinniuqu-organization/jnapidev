@@ -1,44 +1,19 @@
 package cn.lee.study.Jnapitoproject.entity;
 
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
 public class TestEntity {
 
-    protected Integer id ;
+    protected String id ;
 
-    protected String magicId ;
+    protected String userame ;
 
-    protected String firstName ;
+    protected Integer ts ;
 
-    protected String lastName ;
+    private Date createTime ;
 
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getMagicId() {
-        return magicId;
-    }
-
-    public void setMagicId(String magicId) {
-        this.magicId = magicId;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 }
