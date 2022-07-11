@@ -3,5 +3,7 @@
 在git.exe里面
 先下载最新的文件
 git pull
+如果报错
+git pull --rebase origin master
 再上传
 git push -u origin main

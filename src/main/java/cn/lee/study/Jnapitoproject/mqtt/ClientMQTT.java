@@ -3,8 +3,12 @@ package cn.lee.study.Jnapitoproject.mqtt;
 import java.util.concurrent.ScheduledExecutorService;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.annotation.Resource;
 
 /**
  * 模拟一个客户端接收消息
@@ -18,6 +22,7 @@ public class ClientMQTT {
     private static final String clientid = "123444";
     private MqttClient client;
     private MqttConnectOptions options;
+
    // private String userName = "mqtt";    //非必须
     //private String passWord = "mqtt";  //非必须
     private ScheduledExecutorService scheduler;
@@ -51,7 +56,6 @@ public class ClientMQTT {
             int[] Qos = {1};//0：最多一次 、1：最少一次 、2：只有一次
             String[] topic1 = {TOPIC1};
             client.subscribe(topic1, Qos);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,6 +64,5 @@ public class ClientMQTT {
     public static void main(String[] args) {
         ClientMQTT client = new ClientMQTT();
         client.start();
-
     }
 }
