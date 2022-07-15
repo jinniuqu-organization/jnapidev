@@ -14,21 +14,5 @@ import java.util.List;
 @RequestMapping("/test")
 public class TestController {
 
-    @Autowired
-    private TestService testService ;
 
-
-    @RequestMapping(value = "/getById",method = RequestMethod.POST)
-    public List<TestEntity> getById(@RequestBody String id) throws Exception {
-        System.out.println("==============getbyid");
-        return testService.getById(id);
-
-    }
-
-    @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    public String insert(TestEntity testEntity) throws Exception {
-        testService.insert(testEntity);
-        System.out.println("==============insert");
-        return "插入成功";
-    }
 }

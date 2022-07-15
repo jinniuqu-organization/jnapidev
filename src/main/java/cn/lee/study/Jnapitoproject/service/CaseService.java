@@ -36,10 +36,10 @@ public class CaseService {
     @Autowired
     private CaseDao caseDao;
 
-    @Value("${caseToken}")
+//    @Value("${caseToken}")
     public String caseToken;
 
-    @Value("${ip}")
+//    @Value("${ip}")
     public String ip;
 
     private static final String PUBLICKEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzdSPBP/ZFVRX3NLED4jZ\n" +

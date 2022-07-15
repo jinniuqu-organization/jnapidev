@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.lee.study.Jnapitoproject.dao.NlqxxxDao">
+
+    <insert id="insert" parameterType="cn.lee.study.Jnapitoproject.entity.Nlqxxx">
+    insert IGNORE into dwv_qxxx(
+    	Id	,
+		dwmc	,
+		jdx	,
+		wdy	,
+		dqtq	,
+		dqwd	,
+		dqjylqd	,
+		dqsj	,
+		etl_time
+    )values (
+         null,
+         #{dwmc},
+         #{jdx},
+         #{wdy},
+         #{dqtq},
+         #{dqwd},
+         #{dqjylqd},
+         #{dqsj},
+         now()
+    )
+
+    </insert>
+
+</mapper>

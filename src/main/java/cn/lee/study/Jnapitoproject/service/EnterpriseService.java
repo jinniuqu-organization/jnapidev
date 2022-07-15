@@ -26,7 +26,7 @@ import java.util.Map;
 @Slf4j
 public class EnterpriseService {
 
-    @Value("${token}")
+//    @Value("${token}")
     public String token;
 
     @Resource
