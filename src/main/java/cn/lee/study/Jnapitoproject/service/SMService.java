@@ -1,5 +1,6 @@
 package cn.lee.study.Jnapitoproject.service;
 
+import cn.hutool.crypto.SecureUtil;
 import cn.lee.study.Jnapitoproject.dao.*;
 import cn.lee.study.Jnapitoproject.entity.*;
 import cn.lee.study.Jnapitoproject.utils.HttpUtil;
@@ -16,10 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @program: jnapidev
@@ -43,14 +41,26 @@ public class SMService {
     @Value("${appid}")
     public String appId;
 
+    @Value("${AK}")
+    public String AK;
+
+    @Value("${SK}")
+    public String SK;
+
     @Autowired
     SmLzbgaBjslZsDao smLzbgaBjslZsDao;
+
+    @Autowired
+    SmWllzDrhsjclDao smWllzDrhsjclDao;
 
     @Autowired
     SmLzbwjJjglsZsDao smLzbwjJjglsZsDao;
 
     @Autowired
     SmWllzXgfymqjcsDao smWllzXgfymqjcsDao;
+
+    @Autowired
+    SmWllzFxryzsDao smWllzFxryzsDao;
 
     @Autowired
     SmWllzWljwhcgxxrhDao smWllzWljwhcgxxrhDao;
@@ -300,6 +310,7 @@ public class SMService {
             SmLzbzhYqgwtjbtblZs smLzbzhYqgwtjbtblZs = new SmLzbzhYqgwtjbtblZs();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
             smLzbzhYqgwtjbtblZs.setCount(tmpJson.getString("count(*)"));
+            smLzbzhYqgwtjbtblZs.setUpdateTime(new Date());
             SmLzbgaBjslZs queryRes = smLzbzhYqgwtjbtblZsDao.query(smLzbzhYqgwtjbtblZs);
             if (queryRes == null){
                 insertList.add(smLzbzhYqgwtjbtblZs);
@@ -317,5 +328,135 @@ public class SMService {
         }
     }
 
+    /**
+     * 市网络理政办-当日核酸检测采样量-详情
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void wllzDrhsjcl() throws Exception{
+        String url = smPrefix + "/gateway/api/1/wllz/drhsjcl";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> headers = new HashMap<>();
+        String json = "{\"moduleId\": \"4f7a3695167d47a9a920b1883e3dbf4e\"}";
+        params.put("jsonData", json);
+        headers.put("appkey", appkey);
+        /*调用第三方接口*/
+        String res = HttpUtil.sendPostForm(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("RESULT").getJSONArray("data");
+        List<SmWllzDrhsjcl> updateList = new ArrayList<>(0);
+        List<SmWllzDrhsjcl> insertList = new ArrayList<>(0);
+        /*解析*/
+        for (int i = 0; i < jsonArray.size(); i++) {
+            SmWllzDrhsjcl smWllzDrhsjcl = new SmWllzDrhsjcl();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            smWllzDrhsjcl.setHsrs(tmpJson.getString("HSRS"));
+            smWllzDrhsjcl.setUpdateTime(new Date());
+            SmLzbgaBjslZs queryRes = smWllzDrhsjclDao.query(smWllzDrhsjcl);
+            if (queryRes == null){
+                insertList.add(smWllzDrhsjcl);
+            }else {
+                smWllzDrhsjcl.setId(queryRes.getId());
+                updateList.add(smWllzDrhsjcl);
+            }
+        }
+        /*批量插入或更新*/
+        if (insertList.size() > 0) {
+            smWllzDrhsjclDao.insertBatch(insertList);
+        }
+        if (updateList.size() > 0) {
+            smWllzDrhsjclDao.updateBatch(updateList);
+        }
+    }
+
+    /**
+     * 市网络理政办-风险人员总数-详情
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void wllzFxryzs() throws Exception{
+        String url = smPrefix + "/gateway/api/1/wllz/fxryzs";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> headers = new HashMap<>();
+        params.put("pageIndex", "1");
+        params.put("pageSize", "1000");
+        headers.put("appkey", appkey);
+        headers.put("app-id", appId);
+        /*调用第三方接口*/
+        String res = HttpUtil.sendPostForm(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("data").getJSONArray("data");
+        List<SmWllzFxryzs> updateList = new ArrayList<>(0);
+        List<SmWllzFxryzs> insertList = new ArrayList<>(0);
+        /*解析*/
+        for (int i = 0; i < jsonArray.size(); i++) {
+            SmWllzFxryzs smWllzFxryzs = new SmWllzFxryzs();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            smWllzFxryzs.setCount(tmpJson.getLong("风险人员总数"));
+            smWllzFxryzs.setUpdateTime(new Date());
+            SmLzbgaBjslZs queryRes = smWllzFxryzsDao.query(smWllzFxryzs);
+            if (queryRes == null){
+                insertList.add(smWllzFxryzs);
+            }else {
+                smWllzFxryzs.setId(queryRes.getId());
+                updateList.add(smWllzFxryzs);
+            }
+        }
+        /*批量插入或更新*/
+        if (insertList.size() > 0) {
+            smWllzFxryzsDao.insertBatch(insertList);
+        }
+        if (updateList.size() > 0) {
+            smWllzFxryzsDao.updateBatch(updateList);
+        }
+    }
+
+    /**
+     * 市网络理政办-百度集团交通系统-道路路况监控及研判场景-获取指定拥堵预警的拥堵详情-详情(测试)
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void bdjtHqzdyjydxq() throws Exception{
+        String url = smPrefix + "/gateway/api/2/bdjt/hqzdyjydxq";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> headers = new HashMap<>();
+        params.put("nodeId", "7692");
+        params.put("eventId", "131-首都机场辅路-201905280708-15260461540");
+        headers.put("appkey", appkey);
+        headers.put("account", AK);
+        headers.put("secretKey", SK);
+        long millis = System.currentTimeMillis();
+        headers.put("requestTime", millis + "");
+        headers.put("signature", getSignature(millis));
+        /*调用第三方接口*/
+        String res = HttpUtil.sendGet(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("result").getJSONArray("data");
+        List<SmLzbzhYqgwtjbtblZs> updateList = new ArrayList<>(0);
+        List<SmLzbzhYqgwtjbtblZs> insertList = new ArrayList<>(0);
+        /*解析*/
+        for (int i = 0; i < jsonArray.size(); i++) {
+            SmLzbzhYqgwtjbtblZs smLzbzhYqgwtjbtblZs = new SmLzbzhYqgwtjbtblZs();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            smLzbzhYqgwtjbtblZs.setCount(tmpJson.getString("count(*)"));
+            smLzbzhYqgwtjbtblZs.setUpdateTime(new Date());
+            SmLzbgaBjslZs queryRes = smLzbzhYqgwtjbtblZsDao.query(smLzbzhYqgwtjbtblZs);
+            if (queryRes == null){
+                insertList.add(smLzbzhYqgwtjbtblZs);
+            }else {
+                smLzbzhYqgwtjbtblZs.setId(queryRes.getId());
+                updateList.add(smLzbzhYqgwtjbtblZs);
+            }
+        }
+        /*批量插入或更新*/
+        if (insertList.size() > 0) {
+            smLzbzhYqgwtjbtblZsDao.insertBatch(insertList);
+        }
+        if (updateList.size() > 0) {
+            smLzbzhYqgwtjbtblZsDao.updateBatch(updateList);
+        }
+    }
+
+
+    public String getSignature(Long requestTime) {
+        return SecureUtil.sha256(AK + SK + requestTime);
+    }
 
 }
