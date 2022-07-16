@@ -1,13 +1,7 @@
 package cn.lee.study.Jnapitoproject.service;
 
-import cn.lee.study.Jnapitoproject.dao.SmLzbgaBjslZsDao;
-import cn.lee.study.Jnapitoproject.dao.SmLzbwjJjglsZsDao;
-import cn.lee.study.Jnapitoproject.dao.SmWllzWljwhcgxxrhDao;
-import cn.lee.study.Jnapitoproject.dao.SmWllzXgfymqjcsDao;
-import cn.lee.study.Jnapitoproject.entity.SmLzbgaBjslZs;
-import cn.lee.study.Jnapitoproject.entity.SmLzbwjJjglsZs;
-import cn.lee.study.Jnapitoproject.entity.SmWllzWljwhcgxxrh;
-import cn.lee.study.Jnapitoproject.entity.SmWllzXgfymqjcs;
+import cn.lee.study.Jnapitoproject.dao.*;
+import cn.lee.study.Jnapitoproject.entity.*;
 import cn.lee.study.Jnapitoproject.utils.HttpUtil;
 import cn.lee.study.Jnapitoproject.utils.JsonUtils;
 import cn.lee.study.Jnapitoproject.utils.StringUtil;
@@ -60,6 +54,8 @@ public class SMService {
 
     @Autowired
     SmWllzWljwhcgxxrhDao smWllzWljwhcgxxrhDao;
+    @Autowired
+    SmLzbzhYqgwtjbtblZsDao smLzbzhYqgwtjbtblZsDao;
 
     //气象实时数据//未来两小时降雨量
     //@Scheduled(cron = "0 15 2 * * ?")
@@ -288,7 +284,6 @@ public class SMService {
     public void lzbzhYqgwtjbtblZs() throws Exception{
         String url = smPrefix + "/gateway/api/1/lzbzh/yqgwtjbtbl/zs";
         log.info(url);
-        String json = "{\"moduleId\": \"cc5c0f68634044fcbf42301989e58c58\"}";
         HashMap<String, String> params = new HashMap<>();
         HashMap<String, String> headers = new HashMap<>();
         params.put("current", "1");
@@ -297,29 +292,28 @@ public class SMService {
         headers.put("app-id", appId);
         /*调用第三方接口*/
         String res = HttpUtil.sendPostForm(url, params, headers);
-        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("RESULT").getJSONArray("data");
-        List<SmWllzXgfymqjcs> updateList = new ArrayList<>(0);
-        List<SmWllzXgfymqjcs> insertList = new ArrayList<>(0);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("data").getJSONArray("data");
+        List<SmLzbzhYqgwtjbtblZs> updateList = new ArrayList<>(0);
+        List<SmLzbzhYqgwtjbtblZs> insertList = new ArrayList<>(0);
         /*解析*/
         for (int i = 0; i < jsonArray.size(); i++) {
-            SmWllzXgfymqjcs smWllzXgfymqjcs = new SmWllzXgfymqjcs();
+            SmLzbzhYqgwtjbtblZs smLzbzhYqgwtjbtblZs = new SmLzbzhYqgwtjbtblZs();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smWllzXgfymqjcs.setDreamdbLjrs(tmpJson.getString("dreamdb.ljrs"));
-            smWllzXgfymqjcs.setTjrq(tmpJson.getString("tjrq"));
-            SmLzbgaBjslZs queryRes = smWllzXgfymqjcsDao.query(smWllzXgfymqjcs);
+            smLzbzhYqgwtjbtblZs.setCount(tmpJson.getString("count(*)"));
+            SmLzbgaBjslZs queryRes = smLzbzhYqgwtjbtblZsDao.query(smLzbzhYqgwtjbtblZs);
             if (queryRes == null){
-                insertList.add(smWllzXgfymqjcs);
+                insertList.add(smLzbzhYqgwtjbtblZs);
             }else {
-                smWllzXgfymqjcs.setId(queryRes.getId());
-                updateList.add(smWllzXgfymqjcs);
+                smLzbzhYqgwtjbtblZs.setId(queryRes.getId());
+                updateList.add(smLzbzhYqgwtjbtblZs);
             }
         }
         /*批量插入或更新*/
         if (insertList.size() > 0) {
-            smWllzXgfymqjcsDao.insertBatch(insertList);
+            smLzbzhYqgwtjbtblZsDao.insertBatch(insertList);
         }
         if (updateList.size() > 0) {
-            smWllzXgfymqjcsDao.updateBatch(updateList);
+            smLzbzhYqgwtjbtblZsDao.updateBatch(updateList);
         }
     }
 
