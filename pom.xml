@@ -20,6 +20,19 @@
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+<!--			<version>2.2.4</version>-->
+		</dependency>
+
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.8.4</version>
+		</dependency>
+
 		<!--以下是api相关的-->
 		<dependency>
 			<groupId>com.google.guava</groupId>

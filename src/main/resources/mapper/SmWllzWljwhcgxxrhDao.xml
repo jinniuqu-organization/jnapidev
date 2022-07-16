@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lee.study.Jnapitoproject.dao.SmWllzWljwhcgxxrhDao">
+
+    <resultMap id="BaseResultMap" type="cn.lee.study.Jnapitoproject.entity.SmWllzWljwhcgxxrh">
+        <!--@Table sm_wllz_wljwhcgxxrh-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="detailedAddress" column="detailed_address" jdbcType="VARCHAR"/>
+        <result property="endTime" column="end_time" jdbcType="VARCHAR"/>
+        <result property="position" column="position" jdbcType="VARCHAR"/>
+        <result property="startTime" column="start_time" jdbcType="VARCHAR"/>
+        <result property="label" column="label" jdbcType="VARCHAR"/>
+        <result property="crowd" column="crowd" jdbcType="VARCHAR"/>
+        <result property="grade" column="grade" jdbcType="VARCHAR"/>
+        <result property="mobilePhone" column="mobile_phone" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="number" column="number" jdbcType="VARCHAR"/>
+        <result property="addressAreaCode" column="address_area_code" jdbcType="VARCHAR"/>
+        <result property="detailedIntroduction" column="detailed_introduction" jdbcType="VARCHAR"/>
+        <result property="objectId" column="object_id" jdbcType="VARCHAR"/>
+        <result property="insertTime" column="insert_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select id,
+               detailed_address,
+               end_time,
+               position,
+               start_time,
+               label,
+               crowd,
+               grade,
+               mobile_phone,
+               name,
+               number,
+               address_area_code,
+               detailed_introduction,
+               object_id,
+               insert_time,
+               update_time,
+               delete_flag
+        from ODS.sm_wllz_wljwhcgxxrh
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select id,
+               detailed_address,
+               end_time,
+               position,
+               start_time,
+               label,
+               crowd,
+               grade,
+               mobile_phone,
+               name,
+               number,
+               address_area_code,
+               detailed_introduction,
+               object_id,
+               insert_time,
+               update_time,
+               delete_flag
+        from ODS.sm_wllz_wljwhcgxxrh limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        id, detailed_address, end_time, position, start_time, label, crowd, grade, mobile_phone, name, number,
+        address_area_code, detailed_introduction, object_id, insert_time, update_time, delete_flag
+        from ODS.sm_wllz_wljwhcgxxrh
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="detailedAddress != null and detailedAddress != ''">
+                and detailed_address = #{detailedAddress}
+            </if>
+            <if test="endTime != null and endTime != ''">
+                and end_time = #{endTime}
+            </if>
+            <if test="position != null and position != ''">
+                and position = #{position}
+            </if>
+            <if test="startTime != null and startTime != ''">
+                and start_time = #{startTime}
+            </if>
+            <if test="label != null and label != ''">
+                and label = #{label}
+            </if>
+            <if test="crowd != null and crowd != ''">
+                and crowd = #{crowd}
+            </if>
+            <if test="grade != null and grade != ''">
+                and grade = #{grade}
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                and mobile_phone = #{mobilePhone}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="number != null and number != ''">
+                and number = #{number}
+            </if>
+            <if test="addressAreaCode != null and addressAreaCode != ''">
+                and address_area_code = #{addressAreaCode}
+            </if>
+            <if test="detailedIntroduction != null and detailedIntroduction != ''">
+                and detailed_introduction = #{detailedIntroduction}
+            </if>
+            <if test="objectId != null and objectId != ''">
+                and object_id = #{objectId}
+            </if>
+            <if test="insertTime != null">
+                and insert_time = #{insertTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="deleteFlag != null">
+                and delete_flag = #{deleteFlag}
+            </if>
+        </where>
+    </select>
+    <select id="query" resultType="cn.lee.study.Jnapitoproject.entity.SmLzbgaBjslZs">
+        select
+        id, detailed_address, end_time, position, start_time, label, crowd, grade, mobile_phone, name, number,
+        address_area_code, detailed_introduction, object_id, insert_time, update_time, delete_flag
+        from ODS.sm_wllz_wljwhcgxxrh
+        <where>
+            <if test="objectId != null and objectId != ''">
+                and object_id = #{objectId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into ODS.sm_wllz_wljwhcgxxrh(detailed_address, end_time, position, start_time, label, crowd, grade,
+                                            mobile_phone, name, number, address_area_code, detailed_introduction,
+                                            object_id, insert_time, update_time, delete_flag)
+        values (#{detailedAddress}, #{endTime}, #{position}, #{startTime}, #{label}, #{crowd}, #{grade}, #{mobilePhone},
+                #{name}, #{number}, #{addressAreaCode}, #{detailedIntroduction}, #{objectId}, #{insertTime},
+                #{updateTime}, #{deleteFlag})
+    </insert>
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into ODS.sm_wllz_wljwhcgxxrh(detailed_address, end_time, position, start_time, label, crowd, grade,
+        mobile_phone, name, number, address_area_code, detailed_introduction,
+        object_id)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.detailedAddress}, #{item.endTime}, #{item.position}, #{item.startTime}, #{item.label}, #{item.crowd}, #{item.grade}, #{item.mobilePhone},
+            #{item.name}, #{item.number}, #{item.addressAreaCode}, #{item.detailedIntroduction}, #{item.objectId})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update ODS.sm_wllz_wljwhcgxxrh
+        <set>
+            <if test="detailedAddress != null and detailedAddress != ''">
+                detailed_address = #{detailedAddress},
+            </if>
+            <if test="endTime != null and endTime != ''">
+                end_time = #{endTime},
+            </if>
+            <if test="position != null and position != ''">
+                position = #{position},
+            </if>
+            <if test="startTime != null and startTime != ''">
+                start_time = #{startTime},
+            </if>
+            <if test="label != null and label != ''">
+                label = #{label},
+            </if>
+            <if test="crowd != null and crowd != ''">
+                crowd = #{crowd},
+            </if>
+            <if test="grade != null and grade != ''">
+                grade = #{grade},
+            </if>
+            <if test="mobilePhone != null and mobilePhone != ''">
+                mobile_phone = #{mobilePhone},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="number != null and number != ''">
+                number = #{number},
+            </if>
+            <if test="addressAreaCode != null and addressAreaCode != ''">
+                address_area_code = #{addressAreaCode},
+            </if>
+            <if test="detailedIntroduction != null and detailedIntroduction != ''">
+                detailed_introduction = #{detailedIntroduction},
+            </if>
+            <if test="objectId != null and objectId != ''">
+                object_id = #{objectId},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateBatch">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update ODS.sm_wllz_wljwhcgxxrh
+            <set>
+                <if test="item.detailedAddress != null and item.detailedAddress != ''">
+                    detailed_address = #{item.detailedAddress},
+                </if>
+                <if test="item.endTime != null and item.endTime != ''">
+                    end_time = #{item.endTime},
+                </if>
+                <if test="item.position != null and item.position != ''">
+                    `position` = #{item.position},
+                </if>
+                <if test="item.startTime != null and item.startTime != ''">
+                    start_time = #{item.startTime},
+                </if>
+                <if test="item.label != null and item.label != ''">
+                    label = #{item.label},
+                </if>
+                <if test="item.crowd != null and item.crowd != ''">
+                    crowd = #{item.crowd},
+                </if>
+                <if test="item.grade != null and item.grade != ''">
+                    grade = #{item.grade},
+                </if>
+                <if test="item.mobilePhone != null and item.mobilePhone != ''">
+                    mobile_phone = #{item.mobilePhone},
+                </if>
+                <if test="item.name != null and item.name != ''">
+                    `name` = #{item.name},
+                </if>
+                <if test="item.number != null and item.number != ''">
+                    `number` = #{item.number},
+                </if>
+                <if test="item.addressAreaCode != null and item.addressAreaCode != ''">
+                    address_area_code = #{item.addressAreaCode},
+                </if>
+                <if test="item.detailedIntroduction != null and item.detailedIntroduction != ''">
+                    detailed_introduction = #{item.detailedIntroduction},
+                </if>
+                <if test="item.objectId != null and item.objectId != ''">
+                    object_id = #{item.objectId},
+                </if>
+            </set>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from ODS.sm_wllz_wljwhcgxxrh
+        where id = #{id}
+    </delete>
+
+</mapper>

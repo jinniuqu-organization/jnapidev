@@ -13,6 +13,7 @@ import com.jayway.jsonpath.spi.json.JsonProvider;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -59,6 +60,30 @@ public class JsonUtils {
         }
         return null;
     }
+
+
+    /**
+     *
+     * String转map
+     * 通过顿号处理字符串 得到字符数组
+     * 循环字符数组 冒号在处理字符 得到String数组 下标为0 是key 下标为 1是value 组成 key value 装进map
+     * @param str
+     * @return
+     */
+    public static Map<String,Object> stringConvertMap(String str){
+        //根据逗号截取字符串数组
+        String[] strArrayOne = str.split(",");
+        Map<String,Object> map = new HashMap<>();
+        //循环加入map集合
+        for (String s : strArrayOne) {
+            //根据":"截取字符串数组
+            String[] strArrayTwo = s.split(":");
+            //strArrayTwo[0]为key,strArrayTwo[1]value
+            map.put(strArrayTwo[0], strArrayTwo[1]);
+        }
+        return map;
+    }
+
 
     public static String objectToJsonWithType(Object data, TypeReference typeReference){
         try {
