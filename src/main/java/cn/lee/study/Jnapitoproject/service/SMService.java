@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -90,10 +91,10 @@ public class SMService {
         for (int i = 0; i < jsonArray.size(); i++) {
             SmLzbgaBjslZs smLzbgaBjslZs = new SmLzbgaBjslZs();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smLzbgaBjslZs.setOrgName(tmpJson.getString("ORG_NAME"));
-            smLzbgaBjslZs.setDreamdbNum(tmpJson.getString("dreamdb.num"));
-            smLzbgaBjslZs.setBusinessTime(tmpJson.getString("business_time"));
-            smLzbgaBjslZs.setDreamdbOrgCode(tmpJson.getString("dreamdb.ORG_CODE"));
+            smLzbgaBjslZs.setOrgName(StringUtils.trim(tmpJson.getString("ORG_NAME")));
+            smLzbgaBjslZs.setDreamdbNum(StringUtils.trim(tmpJson.getString("dreamdb.num")));
+            smLzbgaBjslZs.setBusinessTime(StringUtils.trim(tmpJson.getString("business_time")));
+            smLzbgaBjslZs.setDreamdbOrgCode(StringUtils.trim(tmpJson.getString("dreamdb.ORG_CODE")));
             SmLzbgaBjslZs queryRes = smLzbgaBjslZsDao.query(smLzbgaBjslZs);
             if (queryRes == null){
                 insertList.add(smLzbgaBjslZs);
@@ -133,8 +134,8 @@ public class SMService {
         for (int i = 0; i < jsonArray.size(); i++) {
             SmLzbwjJjglsZs smLzbwjJjglsZs = new SmLzbwjJjglsZs();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smLzbwjJjglsZs.setNum(tmpJson.getString("num"));
-            smLzbwjJjglsZs.setDreamdbStreetCode(tmpJson.getString("dreamdb.street_code"));
+            smLzbwjJjglsZs.setNum(StringUtils.trim(tmpJson.getString("num")));
+            smLzbwjJjglsZs.setDreamdbStreetCode(StringUtils.trim(tmpJson.getString("dreamdb.street_code")));
             SmLzbgaBjslZs queryRes = smLzbwjJjglsZsDao.query(smLzbwjJjglsZs);
             if (queryRes == null){
                 insertList.add(smLzbwjJjglsZs);
@@ -174,8 +175,8 @@ public class SMService {
         for (int i = 0; i < jsonArray.size(); i++) {
             SmWllzXgfymqjcs smWllzXgfymqjcs = new SmWllzXgfymqjcs();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smWllzXgfymqjcs.setDreamdbLjrs(tmpJson.getString("dreamdb.ljrs"));
-            smWllzXgfymqjcs.setTjrq(tmpJson.getString("tjrq"));
+            smWllzXgfymqjcs.setDreamdbLjrs(StringUtils.trim(tmpJson.getString("dreamdb.ljrs")));
+            smWllzXgfymqjcs.setTjrq(StringUtils.trim(tmpJson.getString("tjrq")));
             SmLzbgaBjslZs queryRes = smWllzXgfymqjcsDao.query(smWllzXgfymqjcs);
             if (queryRes == null){
                 insertList.add(smWllzXgfymqjcs);
@@ -213,19 +214,20 @@ public class SMService {
         for (int i = 0; i < jsonArray.size(); i++) {
             SmWllzWljwhcgxxrh smWllzWljwhcgxxrh = new SmWllzWljwhcgxxrh();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smWllzWljwhcgxxrh.setDetailedAddress(tmpJson.getString("DetailedAddress"));
-            smWllzWljwhcgxxrh.setEndTime(tmpJson.getString("EndTime"));
-            smWllzWljwhcgxxrh.setPosition(tmpJson.getString("Position"));
-            smWllzWljwhcgxxrh.setStartTime(tmpJson.getString("StartTime"));
-            smWllzWljwhcgxxrh.setLabel(tmpJson.getString("Label"));
-            smWllzWljwhcgxxrh.setCrowd(tmpJson.getString("Crowd"));
-            smWllzWljwhcgxxrh.setGrade(tmpJson.getString("Grade"));
-            smWllzWljwhcgxxrh.setMobilePhone(tmpJson.getString("MobilePhone"));
-            smWllzWljwhcgxxrh.setName(tmpJson.getString("Name"));
-            smWllzWljwhcgxxrh.setNumber(tmpJson.getString("Number"));
-            smWllzWljwhcgxxrh.setAddressAreaCode(tmpJson.getString("Address_AreaCode"));
-            smWllzWljwhcgxxrh.setDetailedIntroduction(tmpJson.getString("DetailedIntroduction"));
-            smWllzWljwhcgxxrh.setObjectId(tmpJson.getString("objectId"));
+            log.info(tmpJson.toJSONString());
+            smWllzWljwhcgxxrh.setDetailedAddress(StringUtils.trim(tmpJson.getString("DetailedAddress")));
+            smWllzWljwhcgxxrh.setEndTime(StringUtils.trim(tmpJson.getString("EndTime")));
+            smWllzWljwhcgxxrh.setPosition(StringUtils.trim(tmpJson.getString("Position")));
+            smWllzWljwhcgxxrh.setStartTime(StringUtils.trim(tmpJson.getString("StartTime")));
+            smWllzWljwhcgxxrh.setLabel(StringUtils.trim(tmpJson.getString("Label")));
+            smWllzWljwhcgxxrh.setCrowd(StringUtils.trim(tmpJson.getString("Crowd")));
+            smWllzWljwhcgxxrh.setGrade(StringUtils.trim(tmpJson.getString("Grade")));
+            smWllzWljwhcgxxrh.setMobilePhone(StringUtils.trim(tmpJson.getString("MobilePhone")));
+            smWllzWljwhcgxxrh.setName(StringUtils.trim(tmpJson.getString("Name")));
+            smWllzWljwhcgxxrh.setNumber(StringUtils.trim(tmpJson.getString("Number")));
+            smWllzWljwhcgxxrh.setAddressAreaCode(StringUtils.trim(tmpJson.getString("Address_AreaCode")));
+            smWllzWljwhcgxxrh.setDetailedIntroduction(StringUtils.trim(tmpJson.getString("DetailedIntroduction")));
+            smWllzWljwhcgxxrh.setObjectId(StringUtils.trim(tmpJson.getString("objectId")));
 
             SmLzbgaBjslZs queryRes = smWllzWljwhcgxxrhDao.query(smWllzWljwhcgxxrh);
             if (queryRes == null){
@@ -266,7 +268,7 @@ public class SMService {
         for (int i = 0; i < jsonArray.size(); i++) {
             SmLzbzhYqgwtjbtblZs smLzbzhYqgwtjbtblZs = new SmLzbzhYqgwtjbtblZs();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smLzbzhYqgwtjbtblZs.setCount(tmpJson.getString("count(*)"));
+            smLzbzhYqgwtjbtblZs.setCount(StringUtils.trim(tmpJson.getString("count(*)")));
             smLzbzhYqgwtjbtblZs.setUpdateTime(new Date());
             SmLzbgaBjslZs queryRes = smLzbzhYqgwtjbtblZsDao.query(smLzbzhYqgwtjbtblZs);
             if (queryRes == null){
@@ -306,7 +308,7 @@ public class SMService {
         for (int i = 0; i < jsonArray.size(); i++) {
             SmWllzDrhsjcl smWllzDrhsjcl = new SmWllzDrhsjcl();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smWllzDrhsjcl.setHsrs(tmpJson.getString("HSRS"));
+            smWllzDrhsjcl.setHsrs(StringUtils.trim(tmpJson.getString("HSRS")));
             smWllzDrhsjcl.setUpdateTime(new Date());
             SmLzbgaBjslZs queryRes = smWllzDrhsjclDao.query(smWllzDrhsjcl);
             if (queryRes == null){
@@ -392,7 +394,7 @@ public class SMService {
         for (int i = 0; i < jsonArray.size(); i++) {
             SmLzbzhYqgwtjbtblZs smLzbzhYqgwtjbtblZs = new SmLzbzhYqgwtjbtblZs();
             JSONObject tmpJson = jsonArray.getJSONObject(i);
-            smLzbzhYqgwtjbtblZs.setCount(tmpJson.getString("count(*)"));
+            smLzbzhYqgwtjbtblZs.setCount(StringUtils.trim(tmpJson.getString("count(*)")));
             smLzbzhYqgwtjbtblZs.setUpdateTime(new Date());
             SmLzbgaBjslZs queryRes = smLzbzhYqgwtjbtblZsDao.query(smLzbzhYqgwtjbtblZs);
             if (queryRes == null){
