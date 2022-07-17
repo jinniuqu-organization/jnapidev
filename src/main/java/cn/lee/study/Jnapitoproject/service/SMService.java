@@ -67,54 +67,11 @@ public class SMService {
     @Autowired
     SmLzbzhYqgwtjbtblZsDao smLzbzhYqgwtjbtblZsDao;
 
-    //气象实时数据//未来两小时降雨量
-    //@Scheduled(cron = "0 15 2 * * ?")
-//    @Scheduled(cron="0 */5 * * * ?")
-    @Transactional(value = "masterTransactionManager", propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void insertNlqxxx(){
-//        List<Nldwcode> list= nldwcodeDao.selectList();
-//        for (Nldwcode nldwcode : list) {
-//            String jdx = nldwcode.getJdx();
-//            String wdy = nldwcode.getWdy();
-//            String dwmc = nldwcode.getDwmc();
-////            String jdx = "104.041037";
-////            String wdy = "30.720807";
-//            String url = smPrefix + "v2.5/" + token + "/" + jdx + "," + wdy + "/" + "realtime";
-//            log.info(url);
-//            String result = HttpsUtil.httpsGet(url, null, null);
-//            log.info("############" + "气象实时数据");
-//            if (null != result) {
-//                Nlqxxx bean = new Nlqxxx();
-//                bean.setDwmc(dwmc);
-//                bean.setJdx(jdx);
-//                bean.setWdy(wdy);
-//                bean.setDqtq(String.valueOf(JSONObject.parseObject(result).getJSONObject("result").getJSONObject("realtime").get("skycon")));
-//                bean.setDqwd(String.valueOf(JSONObject.parseObject(result).getJSONObject("result").getJSONObject("realtime").get("temperature")));
-//                bean.setDqjylqd(String.valueOf(JSONObject.parseObject(result).getJSONObject("result").getJSONObject("realtime").getJSONObject("precipitation").getJSONObject("local").get("intensity")));
-//                bean.setDqsj(timeStamp2Date(String.valueOf( JSONObject.parseObject(result).get("server_time"))));
-//                nlqxxxDao.insert(bean);
-//            }
-//            String url2 = "https://api.caiyunapi.com/v2.5/" + token + "/" + jdx + "," + wdy + "/" + "minutely";
-//            log.info(url2);
-//            String result2 = HttpsUtil.httpsGet(url2, null, null);
-//            log.info("############" + "未来两小时降雨数据");
-//            if(null!=result2){
-//                Nlwllxs bean=new Nlwllxs();
-//                bean.setDw(dwmc);
-//                bean.setJdx(jdx);
-//                bean.setWdy(wdy);
-//                bean.setWllxsgl((BigDecimal)JSONObject.parseObject(result2).getJSONObject("result").getJSONObject("minutely").getJSONArray("probability").get(0));
-//                bean.setWllxsqd((BigDecimal)JSONObject.parseObject(result2).getJSONObject("result").getJSONObject("minutely").getJSONArray("precipitation_2h").get(0));
-//                bean.setYjxx(String.valueOf(JSONObject.parseObject(result2).getJSONObject("result").getJSONObject("minutely").get("description")));
-//                bean.setDqsj(timeStamp2Date(String.valueOf( JSONObject.parseObject(result).get("server_time"))));
-//                nlwllxsDao.insert(bean);
-//            }
-//        }
-    }
 
     /**
      * 市网络理政办-市公安局-110接警数量-详情(正式-智慧蓉城专用)接口
      */
+    //    @Scheduled(cron="0 */5 * * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void lzbgaBjslZs() throws Exception {
         String url = smPrefix + "/gateway/api/1/lzbga/bjsl/zs";
