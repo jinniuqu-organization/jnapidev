@@ -108,8 +108,8 @@
                 <if test="item.tjrq != null and item.tjrq != ''">
                     tjrq = #{item.tjrq},
                 </if>
-                <if test="item.dreamdbLjrs != null and item.dreamdbLjrs != ''">
-                    dreamdb_ljrs = #{item.dreamdbLjrs},
+                <if test="item.updateTime != null">
+                    update_time = #{item.updateTime},
                 </if>
             </set>
             where id = #{item.id}

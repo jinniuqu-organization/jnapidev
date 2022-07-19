@@ -219,6 +219,9 @@
         <foreach collection="list" item="item" index="index" open="" close="" separator=";">
             update ODS.sm_wllz_wljwhcgxxrh
             <set>
+                <if test="item.updateTime != null">
+                    update_time = #{item.updateTime},
+                </if>
                 <if test="item.detailedAddress != null and item.detailedAddress != ''">
                     detailed_address = #{item.detailedAddress},
                 </if>

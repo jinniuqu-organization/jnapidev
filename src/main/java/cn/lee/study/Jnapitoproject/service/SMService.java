@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,7 +73,7 @@ public class SMService {
     /**
      * 市网络理政办-市公安局-110接警数量-详情(正式-智慧蓉城专用)接口
      */
-    //    @Scheduled(cron="0 */5 * * * ?")
+    @Scheduled(cron="0 0 */1 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void lzbgaBjslZs() throws Exception {
         String url = smPrefix + "/gateway/api/1/lzbga/bjsl/zs";
@@ -95,6 +96,7 @@ public class SMService {
             smLzbgaBjslZs.setDreamdbNum(StringUtils.trim(tmpJson.getString("dreamdb.num")));
             smLzbgaBjslZs.setBusinessTime(StringUtils.trim(tmpJson.getString("business_time")));
             smLzbgaBjslZs.setDreamdbOrgCode(StringUtils.trim(tmpJson.getString("dreamdb.ORG_CODE")));
+            smLzbgaBjslZs.setUpdateTime(new Date());
             SmLzbgaBjslZs queryRes = smLzbgaBjslZsDao.query(smLzbgaBjslZs);
             if (queryRes == null){
                 insertList.add(smLzbgaBjslZs);
@@ -116,6 +118,7 @@ public class SMService {
     /**
      * 市网络理政办-市卫健委-居家隔离数-详情(正式)
      */
+    @Scheduled(cron="0 0 */1 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void lzbwjJjglsZs() throws Exception{
         String url = smPrefix + "/gateway/api/1/lzbwj/jjgls/zs";
@@ -136,6 +139,7 @@ public class SMService {
             JSONObject tmpJson = jsonArray.getJSONObject(i);
             smLzbwjJjglsZs.setNum(StringUtils.trim(tmpJson.getString("num")));
             smLzbwjJjglsZs.setDreamdbStreetCode(StringUtils.trim(tmpJson.getString("dreamdb.street_code")));
+            smLzbwjJjglsZs.setUpdateTime(new Date());
             SmLzbgaBjslZs queryRes = smLzbwjJjglsZsDao.query(smLzbwjJjglsZs);
             if (queryRes == null){
                 insertList.add(smLzbwjJjglsZs);
@@ -157,6 +161,7 @@ public class SMService {
     /**
      * 市网络理政办-新冠肺炎累计排查密切接触者数-详情
      */
+    @Scheduled(cron="0 0 */1 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void wllzXgfymqjcs() throws Exception{
         String url = smPrefix + "/gateway/api/1/wllz/xgfymqjcs";
@@ -177,6 +182,7 @@ public class SMService {
             JSONObject tmpJson = jsonArray.getJSONObject(i);
             smWllzXgfymqjcs.setDreamdbLjrs(StringUtils.trim(tmpJson.getString("dreamdb.ljrs")));
             smWllzXgfymqjcs.setTjrq(StringUtils.trim(tmpJson.getString("tjrq")));
+            smWllzXgfymqjcs.setUpdateTime(new Date());
             SmLzbgaBjslZs queryRes = smWllzXgfymqjcsDao.query(smWllzXgfymqjcs);
             if (queryRes == null){
                 insertList.add(smWllzXgfymqjcs);
@@ -197,6 +203,7 @@ public class SMService {
     /**
      * 市网络理政办-文旅局-文化场馆信息-详情(融合服务)
      */
+    @Scheduled(cron="0 0 */1 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void wllzWljwhcgxxrh() throws Exception{
         String url = smPrefix + "/gateway/mixservice/1/wllz/wljwhcgxxrh";
@@ -228,6 +235,7 @@ public class SMService {
             smWllzWljwhcgxxrh.setAddressAreaCode(StringUtils.trim(tmpJson.getString("Address_AreaCode")));
             smWllzWljwhcgxxrh.setDetailedIntroduction(StringUtils.trim(tmpJson.getString("DetailedIntroduction")));
             smWllzWljwhcgxxrh.setObjectId(StringUtils.trim(tmpJson.getString("objectId")));
+            smWllzWljwhcgxxrh.setUpdateTime(new Date());
 
             SmLzbgaBjslZs queryRes = smWllzWljwhcgxxrhDao.query(smWllzWljwhcgxxrh);
             if (queryRes == null){
@@ -249,6 +257,7 @@ public class SMService {
     /**
      * 市网络理政办-智慧蓉城疫情防控专班-按公卫数据统计所有本土在院病例-详情(正式)-接入基础技术文档
      */
+    @Scheduled(cron="0 0 */1 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void lzbzhYqgwtjbtblZs() throws Exception{
         String url = smPrefix + "/gateway/api/1/lzbzh/yqgwtjbtbl/zs";
@@ -290,6 +299,7 @@ public class SMService {
     /**
      * 市网络理政办-当日核酸检测采样量-详情
      */
+    @Scheduled(cron="0 0 */1 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void wllzDrhsjcl() throws Exception{
         String url = smPrefix + "/gateway/api/1/wllz/drhsjcl";
@@ -330,6 +340,7 @@ public class SMService {
     /**
      * 市网络理政办-风险人员总数-详情
      */
+    @Scheduled(cron="0 0 */1 * * ?")
     @Transactional(rollbackFor = Exception.class)
     public void wllzFxryzs() throws Exception{
         String url = smPrefix + "/gateway/api/1/wllz/fxryzs";

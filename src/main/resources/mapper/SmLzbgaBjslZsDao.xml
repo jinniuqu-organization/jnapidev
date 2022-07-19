@@ -140,6 +140,9 @@
                 <if test="item.businessTime != null and item.businessTime != ''">
                     business_time = #{item.businessTime},
                 </if>
+                <if test="item.updateTime != null">
+                    update_time = #{item.updateTime},
+                </if>
             </set>
             where id = #{item.id}
         </foreach>
