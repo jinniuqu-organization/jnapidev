@@ -4,22 +4,20 @@ import cn.hutool.crypto.SecureUtil;
 import cn.lee.study.Jnapitoproject.dao.*;
 import cn.lee.study.Jnapitoproject.entity.*;
 import cn.lee.study.Jnapitoproject.utils.HttpUtil;
-import cn.lee.study.Jnapitoproject.utils.JsonUtils;
-import cn.lee.study.Jnapitoproject.utils.StringUtil;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @program: jnapidev
@@ -49,25 +47,41 @@ public class SMService {
     @Value("${SK}")
     public String SK;
 
-    @Autowired
+    @Resource
     SmLzbgaBjslZsDao smLzbgaBjslZsDao;
 
-    @Autowired
+    @Resource
     SmWllzDrhsjclDao smWllzDrhsjclDao;
 
-    @Autowired
+    @Resource
     SmLzbwjJjglsZsDao smLzbwjJjglsZsDao;
 
-    @Autowired
+    @Resource
     SmWllzXgfymqjcsDao smWllzXgfymqjcsDao;
 
-    @Autowired
+    @Resource
     SmWllzFxryzsDao smWllzFxryzsDao;
 
-    @Autowired
+    @Resource
     SmWllzWljwhcgxxrhDao smWllzWljwhcgxxrhDao;
-    @Autowired
+
+    @Resource
     SmLzbzhYqgwtjbtblZsDao smLzbzhYqgwtjbtblZsDao;
+
+    @Resource
+    ZyxtclztDao zyxtclztDao;
+
+    @Resource
+    SmLzbZyxtclxxDao smLzbZyxtclxxDao;
+
+    @Resource
+    SmLzbZyxtgzryDao smLzbZyxtgzryDao;
+
+    @Resource
+    SmLzbZyxtryxxDao smLzbZyxtryxxDao;
+
+    @Resource
+    SmLzbZyxtzyrwDao smLzbZyxtzyrwDao;
 
 
     /**
@@ -296,6 +310,7 @@ public class SMService {
         }
     }
 
+
     /**
      * 市网络理政办-当日核酸检测采样量-详情
      */
@@ -422,6 +437,180 @@ public class SMService {
         if (updateList.size() > 0) {
             smLzbzhYqgwtjbtblZsDao.updateBatch(updateList);
         }
+    }
+
+
+    /**
+     * 市网络理政办-智慧蓉城-转运系统车辆状态-详情接口
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void zyxtclzt() throws Exception{
+        String url = smPrefix + "/gateway/api/1/lzb/rc/zyxtclzt";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("districts_name", "金牛区");
+        params.put("pageIndex", "1");
+        params.put("pageSize", "1000");
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("appkey", appkey);
+        headers.put("app-id", appId);
+        /*调用第三方接口*/
+        String res = HttpUtil.sendGet(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("data").getJSONArray("data");
+        List<zyxtclzt> updateList = new ArrayList<>(0);
+        List<zyxtclzt> insertList = new ArrayList<>(0);
+        /*解析*/
+        for (int i = 0; i < jsonArray.size(); i++) {
+            zyxtclzt zyxtclzt = new zyxtclzt();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            zyxtclzt = tmpJson.toJavaObject(zyxtclzt.getClass());
+            zyxtclzt queryRes = zyxtclztDao.query(zyxtclzt.getID());
+            if (queryRes == null){
+                insertList.add(zyxtclzt);
+            }else {
+                updateList.add(zyxtclzt);
+            }
+        }
+        /*批量插入或更新*/
+        if (insertList.size() > 0) {
+            zyxtclztDao.insertBatch(insertList);
+        }
+        if (updateList.size() > 0) {
+            zyxtclztDao.updateBatch(updateList);
+        }
+    }
+
+    /**
+     * 市网络理政办-智慧蓉城-转运系统车辆信息-详情接口
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void zyxtclxx() throws Exception{
+        String url = smPrefix + "/gateway/api/1/lzb/rc/zyxtclxx";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("districts_name", "金牛区");
+        params.put("pageIndex", "1");
+        params.put("pageSize", "1000");
+        params.put("start_time", "2022-02-02");
+        params.put("end_time", "2022-07-19");
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("appkey", appkey);
+        headers.put("app-id", appId);
+        /*调用第三方接口*/
+        String res = HttpUtil.sendGet(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("data").getJSONArray("data");
+        List<SmLzbZyxtclxx> insertList = new ArrayList<>(0);
+        for (int i = 0; i < jsonArray.size(); i++) {
+            SmLzbZyxtclxx zyxtclxx = new SmLzbZyxtclxx();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            zyxtclxx = tmpJson.toJavaObject(zyxtclxx.getClass());
+            insertList.add(zyxtclxx);
+        }
+        if (insertList.size()>0){
+            smLzbZyxtclxxDao.insertOrUpdateBatch(insertList);
+        }else{
+            log.info("没有数据");
+        }
+    }
+
+    /**
+     * 市网络理政办-智慧蓉城-转运系统工作人员-详情接口
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void zyxtgzry() throws Exception{
+        String url = smPrefix + "/gateway/api/1/lzb/rc/zyxtgzry";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("districts_name", "金牛区");
+        params.put("pageIndex", "1");
+        params.put("pageSize", "1000");
+        params.put("start_time", "2022-05-24");
+        params.put("end_time", "2022-07-19");
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("appkey", appkey);
+        headers.put("app-id", appId);
+        /*调用第三方接口*/
+        String res = HttpUtil.sendGet(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("data").getJSONArray("data");
+        List<SmLzbZyxtgzry> insertList = new ArrayList<>(0);
+        /*解析*/
+        for (int i = 0; i < jsonArray.size(); i++) {
+            SmLzbZyxtgzry smLzbZyxtgzry = new SmLzbZyxtgzry();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            smLzbZyxtgzry = tmpJson.toJavaObject(smLzbZyxtgzry.getClass());
+            insertList.add(smLzbZyxtgzry);
+        }
+        if (insertList.size() > 0) {
+            smLzbZyxtgzryDao.insertOrUpdateBatch(insertList);
+        }else{
+            log.info("没有数据");
+        }
+
+    }
+
+    /**
+     * 市网络理政办-智慧蓉城-转运系统工作人员-详情接口
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void zyxtryxx() throws Exception{
+        String url = smPrefix + "/gateway/api/1/lzb/rc/zyxtryxx";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("districts_name", "金牛区");
+        params.put("pageIndex", "1");
+        params.put("pageSize", "100");
+        params.put("start_time", "2022-05-24");
+        params.put("end_time", "2022-07-19");
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("appkey", appkey);
+        headers.put("app-id", appId);
+        /*调用第三方接口*/
+        String res = HttpUtil.sendGet(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("data").getJSONArray("data");
+        List<SmLzbZyxtryxx> insertList = new ArrayList<>(0);
+        /*解析*/
+        for (int i = 0; i < jsonArray.size(); i++) {
+            SmLzbZyxtryxx smLzbZyxtryxx = new SmLzbZyxtryxx();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            smLzbZyxtryxx = tmpJson.toJavaObject(smLzbZyxtryxx.getClass());
+            insertList.add(smLzbZyxtryxx);
+        }
+        if (insertList.size() > 0) {
+            smLzbZyxtryxxDao.insertOrUpdateBatch(insertList);
+        }
+    }
+
+    /**
+     * 市网络理政办-智慧蓉城-转运系统转运任务-详情接口
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public void zyxtzyrw() throws Exception{
+        String url = smPrefix + "/gateway/api/1/lzb/rc/zyxtzyrw";
+        log.info(url);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("districts_name", "金牛区");
+        params.put("pageIndex", "1");
+        params.put("pageSize", "100");
+        HashMap<String, String> headers = new HashMap<>();
+        headers.put("appkey", appkey);
+        headers.put("app-id", appId);
+        /*调用第三方接口*/
+        String res = HttpUtil.sendGet(url, params, headers);
+        JSONArray jsonArray = JSONObject.parseObject(res).getJSONObject("data").getJSONArray("data");
+        List<SmLzbZyxtzyrw> updateList = new ArrayList<>(0);
+        List<SmLzbZyxtzyrw> insertList = new ArrayList<>(0);
+        /*解析*/
+        for (int i = 0; i < jsonArray.size(); i++) {
+            SmLzbZyxtzyrw smLzbZyxtzyrw = new SmLzbZyxtzyrw();
+            JSONObject tmpJson = jsonArray.getJSONObject(i);
+            smLzbZyxtzyrw = tmpJson.toJavaObject(smLzbZyxtzyrw.getClass());
+            insertList.add(smLzbZyxtzyrw);
+        }
+        /*批量插入或更新*/
+        if (insertList.size() > 0) {
+            smLzbZyxtzyrwDao.insertOrUpdateBatch(insertList);
+        }
+
     }
 
 

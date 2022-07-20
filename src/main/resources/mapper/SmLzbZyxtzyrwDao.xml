@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lee.study.Jnapitoproject.dao.SmLzbZyxtzyrwDao">
+
+
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into ODS.sm_lzb_zyxtzyrw(
+        id,city_name, districts_code, street_code, community_name, transfer_task_type,
+        transfer_start_type, transfer_destination_type, transfer_destination_name, transfer_destination_detail, transfer_task_source,
+         transfer_car_source, car_id, car_no, allowed_passenger_num, parking_address,
+          car_phone, transfer_driver_source, driver_id, driver_name, driver_phone,
+           transfer_accompany_source, accompany_id, accompany_name, accompany_phone, expect_transfer_begin_time,
+            transfer_begin_address, expect_transfer_end_time, transfer_end_time, transfer_task_status, create_user_name,
+             order_confirm_time, order_confirm_user_name, destination_contacts_name, destination_contacts_phone, task_create_way,
+              transfer_task_tag, airline_company, flight_number, remark, task_type,
+               assign_speed, car_type)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id},#{entity.cityName}, #{entity.districtsCode}, #{entity.streetCode}, #{entity.communityName},
+             #{entity.transferTaskType}, #{entity.transferStartType}, #{entity.transferDestinationType}, #{entity.transferDestinationName}, #{entity.transferDestinationDetail},
+              #{entity.transferTaskSource}, #{entity.transferCarSource}, #{entity.carId}, #{entity.carNo}, #{entity.allowedPassengerNum},
+               #{entity.parkingAddress}, #{entity.carPhone}, #{entity.transferDriverSource}, #{entity.driverId}, #{entity.driverName},
+               #{entity.driverPhone}, #{entity.transferAccompanySource}, #{entity.accompanyId}, #{entity.accompanyName}, #{entity.accompanyPhone},
+                #{entity.expectTransferBeginTime}, #{entity.transferBeginAddress}, #{entity.expectTransferEndTime}, #{entity.transferEndTime}, #{entity.transferTaskStatus},
+                 #{entity.createUserName}, #{entity.orderConfirmTime}, #{entity.orderConfirmUserName}, #{entity.destinationContactsName}, #{entity.destinationContactsPhone},
+                  #{entity.taskCreateWay}, #{entity.transferTaskTag}, #{entity.airlineCompany}, #{entity.flightNumber}, #{entity.remark},
+                   #{entity.taskType}, #{entity.assignSpeed}, #{entity.carType})
+        </foreach>
+        on duplicate key update
+         id = values(id)
+         </insert>
+
+</mapper>
+

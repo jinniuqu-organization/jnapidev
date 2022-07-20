@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lee.study.Jnapitoproject.dao.SmLzbZyxtryxxDao">
+
+
+    <!-- 批量插入或按主键更新 -->
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into ODS.sm_lzb_zyxtryxx(id,task_id, transfer_sub_status, city_name, districts_code, street_code, community_name, nationality, residential_address, permanent_address, name, sex, card_type, card_id, phone, transfer_person_tag, transfer_person_source, transfer_person_control_way, health_status, health_code_status, flight_number, seat_number, feel_hot, entry_time, expect_get_on_time, expect_get_on_address, expect_get_off_address, xf_time, status, cancel_transfer_reason, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id},#{entity.taskId}, #{entity.transferSubStatus}, #{entity.cityName}, #{entity.districtsCode}, #{entity.streetCode}, #{entity.communityName}, #{entity.nationality}, #{entity.residentialAddress}, #{entity.permanentAddress}, #{entity.name}, #{entity.sex}, #{entity.cardType}, #{entity.cardId}, #{entity.phone}, #{entity.transferPersonTag}, #{entity.transferPersonSource}, #{entity.transferPersonControlWay}, #{entity.healthStatus}, #{entity.healthCodeStatus}, #{entity.flightNumber}, #{entity.seatNumber}, #{entity.feelHot}, #{entity.entryTime}, #{entity.expectGetOnTime}, #{entity.expectGetOnAddress}, #{entity.expectGetOffAddress}, #{entity.xfTime}, #{entity.status}, #{entity.cancelTransferReason}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+         id = values(id)
+    </insert>
+
+</mapper>
+

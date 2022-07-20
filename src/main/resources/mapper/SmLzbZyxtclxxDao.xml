@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lee.study.Jnapitoproject.dao.SmLzbZyxtclxxDao">
+
+
+    <insert id="insertOrUpdateBatch" keyProperty="" useGeneratedKeys="true">
+        insert into sm_lzb_zyxtclxx(ID, 车牌, type, allowed_passenger_num, license_type, districts_code, street_code, community_name, parking_address, organization)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.id}, #{entity.车牌}, #{entity.type}, #{entity.allowedPassengerNum}, #{entity.licenseType}, #{entity.districtsCode}, #{entity.streetCode}, #{entity.communityName}, #{entity.parkingAddress}, #{entity.organization})
+        </foreach>
+        on duplicate key update
+        ID = values(ID)
+
+    </insert>
+
+
+
+
+</mapper>
+

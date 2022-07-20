@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lee.study.Jnapitoproject.dao.ZyxtclztDao">
+
+
+
+    <select id="query" resultType="cn.lee.study.Jnapitoproject.entity.zyxtclzt">
+        select
+        *
+        from ODS.sm_lzb_zyxtclzt
+        where ID = #{ID}
+        limit 1
+    </select>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into
+        ODS.sm_lzb_zyxtclzt(ID, districts_name,car_no,allowed_passenger_num)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.ID},
+            #{item.districts_name},
+            #{item.car_no},
+            #{item.allowed_passenger_num}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateBatch">
+        <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+            update ODS.sm_lzb_zyxtclzt
+            <set>
+                <if test="item.districts_name != null">
+                    update_time = #{item.districts_name},
+                </if>
+                <if test="item.car_no != null">
+                    update_time = #{item.car_no},
+                </if>
+                <if test="item.allowed_passenger_num != null">
+                    update_time = #{item.allowed_passenger_num},
+                </if>
+            </set>
+            where ID = #{item.ID}
+        </foreach>
+    </update>
+
+
+
+</mapper>
